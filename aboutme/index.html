@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <title>About Me</title>
-  <link rel="shortcut icon" type="image/png" href="../fav.png"/>
+  <link rel="shortcut icon" type="image/png" href="../fav.png?=1"/>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -10,31 +10,36 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="../js/loadtemplate.js"></script>
+  <style>
+    body{
+      overflow-x: hidden;
+    }
+  </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-sm bg-light navbar-light">
-
-    <a class="navbar-brand" href="../">Wesley Maa</a>
-  
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="../aboutme">About Me</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../projects">My Projects</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <div data-include="header">Header</div>
   <div class="jumbotron" id = "title">
     <h1 class='text-center'>Wesley Maa</h1>
-    <p class='text-center'>Portfolio</h1>
+    <p class='text-center'>About Me</h1>
   </div>
-
+  <div container>
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <img src="me.jpg" style="padding-left:1%; padding-bottom:1%;"  class="img-fluid">
+      </div>
+      <div class="col-sm-12 col-md-6 text-center" style="padding-right:2%;">
+        <h3>Hey There, I'm Wesley</h3>
+        <p>Thanks for checking out my website! I'm currently a junior at Palo Alto High School, though I've
+          spent most of my life in Japan at <a href="https://www.asij.ac.jp/" target="_blank">ASIJ</a> and in Indonesia at <a href="https://www.jisedu.or.id/" target="_blank">JIS</a>.
+        </p>
+        <p>Going through middle and (now) high school, I've discovered a passion for robotics and anything tangentially related.
+           I'm currently the software lead at JUMP Robotics, a competitive robotics team for the FIRST Robotics Competition
+        </p>
+      </div>
+  </div>
+  </div>
+  <div data-include="footer">Footer</div>
 </body>
 </html>

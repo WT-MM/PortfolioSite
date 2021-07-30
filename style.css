@@ -1,3 +1,9 @@
+.carousel-caption{
+        color:rgb(231, 227, 227);
+        font-family: "Helvetica Neueu", Arial, Helvetica, sans-serif;
+}
+
+
 .carousel-inner,.carousel,.carousel-item,.container,.fill {
         height:100%;
         min-height:400px;

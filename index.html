@@ -12,11 +12,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="/js/carousel.js"></script>
 </head>
-<body style="background-color:#f2f2f2; height:100vh; overflow-y:hidden;">
-  <div class="container-fluid h-100">
-    <div class="row h-100">
+<body style="background-color:#f2f2f2; height:100vh; ">
+  <div class="container-fluid">
+    <div class="row">
       <div class="col-md-6">
-        <div class="row"  style="margin-top:25%;">
+        <div class="row" style="margin-top:40%">
           <div class="col-md-8">
             <h1 class="display-4 text-center">Wesley Maa</h1>
             <p class="lead text-center">Welcome to my site</p>
@@ -39,27 +39,27 @@
                     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                     <li data-target="#myCarousel" data-slide-to="1"></li>
                     <li data-target="#myCarousel" data-slide-to="2"></li>
-                    <li data-target="#myCarousel" data-slide-to="3"></li>
                 </ol>
     
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <div>
-                          <video width="320" height="240" autoplay>
-                          <source src="movie.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                        </video>
-                      </div>
+                        <img src="carousel/robot.png">
+                        <div class="carousel-caption">
+                          <small>2021 Robot Reveal</small>
+                        </div>
                     </div>
                     <div class="carousel-item">
-                        <div class="fill" style=" background-color:#b33f4a;">2</div>
+                        <img src="carousel/waterfall.JPG">
+                        <div class="carousel-caption">
+                          <small>Waterfall in Kawazu</small>
+                        </div>
                     </div>
                     <div class="carousel-item">
-                        <div class="fill" style=" background-color:#7fc2f4;">3</div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="fill" style=" background-color:#e47794;">4</div>
+                        <img src="carousel/miyajima.jpg">
+                        <div class="carousel-caption">
+                          <small>Torii Gate in Miyajima Island</small>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -67,30 +67,5 @@
       </div>
     </div>
   </div>
-
-  <!--
-  <div class="container d-flex h-75">
-    <div class="row my-auto">
-      <div class="col-8">
-        <div class="row align-self-center w-50">
-          <div class="col-12 mx-auto">
-              <h1 class="display-4 text-center">Wesley Maa</h1>
-              <p class="lead text-center">Welcome to my site</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-2 my-auto">
-        <div class="row align-self-center">
-          <p class="lead text-right">
-            <a class="btn btn-secondary btn-lg" href="/aboutme" role="button">About Me</a>
-          </p>
-          <p class="lead text-right">
-            <a class="btn btn-secondary btn-lg" href="/projects" role="button">My Projects</a>
-          </p>
-        </div>
-      </div>
-      </div>
-    </div>
-</div>-->
 </body>
 </html>

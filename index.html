@@ -10,8 +10,65 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="/js/carousel.js"></script>
 </head>
-<body style="background-color:#f2f2f2; height:100vh;">
+<body style="background-color:#f2f2f2; height:100vh; overflow-y:hidden;">
+  <div class="container-fluid h-100">
+    <div class="row h-100">
+      <div class="col-md-6">
+        <div class="row"  style="margin-top:25%;">
+          <div class="col-md-8">
+            <h1 class="display-4 text-center">Wesley Maa</h1>
+            <p class="lead text-center">Welcome to my site</p>
+          </div>
+          <div class="col-md-4 align-self-center">
+            <p class="lead text-right">
+              <a class="btn btn-secondary btn-lg" href="/aboutme" role="button">About Me</a>
+            </p>
+            <p class="lead text-right">
+              <a class="btn btn-secondary btn-lg" href="/projects" role="button">My Projects</a>
+            </p>
+          </div>
+        </div>
+        </div>
+      <div class="col-md-6">
+        <div class="container">
+          <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                    <li data-target="#myCarousel" data-slide-to="3"></li>
+                </ol>
+    
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div>
+                          <video width="320" height="240" autoplay>
+                          <source src="movie.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                        </video>
+                      </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="fill" style=" background-color:#b33f4a;">2</div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="fill" style=" background-color:#7fc2f4;">3</div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="fill" style=" background-color:#e47794;">4</div>
+                    </div>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <!--
   <div class="container d-flex h-75">
     <div class="row my-auto">
       <div class="col-8">
@@ -34,6 +91,6 @@
       </div>
       </div>
     </div>
-</div>
+</div>-->
 </body>
 </html>

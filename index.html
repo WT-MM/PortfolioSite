@@ -11,10 +11,37 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="/js/carousel.js"></script>
+  <script>
+    function redirect(link){
+      window.location=link
+    }
+    function newtab(link){
+      window.open('https://' + link, '_blank').focus();
+    }
+  </script>
   <style>
+    :root{
+      --secondaryColor : rgb(206, 204, 204);
+    }
     .carouselpic{
       height:100%
     }
+    .subpagelink{
+      color:black;
+    }
+    .subpagelink:hover{
+      color:black;
+      text-decoration:none;
+      filter:opacity(0.5);
+    }
+    #outlinks{
+      margin-top:20%; 
+      background-color:var(--secondaryColor);
+    }
+    #myCarousel{
+      background-color:var(--secondaryColor);
+    }
+
   </style>
 </head>
 <body style="background-color:#f2f2f2; height:100%;">
@@ -27,25 +54,25 @@
             <p class="lead text-center">Welcome to my site</p>
           </div>
         </div>
-        <div class="row text-center" style="margin-top:50%; background-color:gray; ">
-          <div class="col-md-3">
-            <p class="lead">
-              <a href="/aboutme">About Me</a>
+        <div id="outlinks" class="row d-flex text-center">
+          <div class="col-md-3 subpagelink" style="width:100%;" onclick="redirect('/aboutme')">
+            <p class="lead my-auto">
+              <a href="/aboutme" class="subpagelink" >About Me</a>
             </p>
           </div>
-          <div class="col-md-3">
-            <p class="lead">
-              <a href="/projects">Projects</a>
+          <div class="col-md-3 subpagelink" onclick="redirect('/projects')">
+            <p class="lead my-auto">
+              <a href="/projects" class="subpagelink">Projects</a>
             </p>
           </div>
-          <div class="col-md-3">
-            <p class="lead">
-              <a href="/resume">Experiences</a>
+          <div class="col-md-3 subpagelink" onclick="redirect('/resume')">
+            <p class="lead my-auto">
+              <a href="/resume" class="subpagelink">Experiences</a>
             </p>
           </div>
-          <div class="col-md-3">
-            <p class="lead">
-              <a href="https://github.com/WT-MM" target="_blank" role="button">Github</a>
+          <div class="col-md-3 subpagelink" onclick="newtab('github.com')">
+            <p class="lead my-auto">
+              <a href="https://github.com/WT-MM" target="_blank" class="subpagelink">Github</a>
             </p>
           </div>
         </div>

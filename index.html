@@ -18,7 +18,9 @@
     function newtab(link){
       window.open('https://' + link, '_blank').focus();
     }
+    
   </script>
+  <scropt src="index.js"></scropt>
   <style>
     :root{
       --secondaryColor : rgb(206, 204, 204);
@@ -41,17 +43,21 @@
     #myCarousel{
       background-color:var(--secondaryColor);
     }
+    #remaining{
+      background-color: var(--secondaryColor);
+      flex-grow: 1;
+    }
 
   </style>
 </head>
 <body style="background-color:#f2f2f2; height:100%;">
   <div class="container-fluid" style="height:100%">
     <div class="row no-gutters" style="height:100%">
-      <div class="col-md-6">
+      <div class="col-md-6 d-flex" style="flex-direction:column">
         <div class="row" style="margin-top:25%">
           <div class="col">
             <h1 class="display-4 text-center">Wesley Maa</h1>
-            <p class="lead text-center">Welcome to my site</p>
+            <p class="lead text-center" data-r481="Yes">High School Student | Passionate Tinkerer</p>
           </div>
         </div>
         <div id="outlinks" class="row d-flex text-center">
@@ -76,6 +82,7 @@
             </p>
           </div>
         </div>
+        <div class="row d-flex" id="remaining"></div>
         <!--
         <div class="row" style="margin-top:20%">
           <div class="col-md-8">

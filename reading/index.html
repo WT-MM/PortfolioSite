@@ -16,9 +16,40 @@
         transform:scale(1.01);
 
       }
+
       .book{
         object-fit:contain;
+        /*animation: scroll 4s infinite;*/
       }
+
+      @keyframes scroll{
+        from{
+          transform: translateY(0)
+        }
+        to{
+          transform: translateY(100vh)
+        }
+      }
+
+      .vert .carousel-item-next.carousel-item-left,
+      .vert .carousel-item-prev.carousel-item-right {
+          -webkit-transform: translate3d(0, 0, 0);
+                  transform: translate3d(0, 0, 0);
+      }
+
+      .vert .carousel-item-next,
+      .vert .active.carousel-item-right {
+          -webkit-transform: translate3d(0, 100%, 0);
+                  transform: translate3d(0, 100% 0);
+      }
+
+      .vert .carousel-item-prev,
+      .vert .active.carousel-item-left {
+      -webkit-transform: translate3d(0,-100%, 0);
+              transform: translate3d(0,-100%, 0);
+      }
+
+
     </style>
   </head>
   <body>
@@ -41,11 +72,27 @@
         <div class="col-md-2 book"></div>
     </div>-->
 
+    <!--
     <div class="row">
       <div class="col-6" id="scifi" data-include="scifiBooks">
       </div>
       <div class="col-6" id="other" data-include="otherBooks">
       </div>
+    </div>-->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <div id="carouselExampleControls" class="carousel vert slide" data-ride="carousel" data-interval="100">
+            <div class="carousel-inner" data-include="scifiBooks"></div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div id="carouselExampleControls" class="carousel vert slide" data-ride="carousel" data-interval="100">
+            <div class="carousel-inner" data-include="otherBooks"></div>
+        </div>
+      </div>
+    </div>
     </div>
 
 

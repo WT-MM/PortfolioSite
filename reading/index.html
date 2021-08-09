@@ -12,35 +12,44 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/js/loadtemplate.js"></script>
     <style>
-      img:hover{
+      .book:hover{
         transform:scale(1.01);
+
       }
       .book{
-        /*max-height:300px;*/
-      }
-      img{
         object-fit:contain;
       }
     </style>
   </head>
   <body>
     <div data-include="header"></div>
+    <!--
     <div class="row" style="margin:10px">
-        <div class="col-md-2 border-right book">
-          <img src="covers/3body.jpg" width="100%" height="100%">
+        <div class="col-md-2 border-right">
+          <img class="book" src="covers/3body.jpg" width="100%" height="100%">
         </div>
         <div class="col-md-2 border-right book">
-          <img src="covers/sheepchase.jpg" width="100%" height="100%">
+          <img class="book" src="covers/sheepchase.jpg" width="100%" height="100%">
         </div>
         <div class="col-md-2 border-right book">
-          <img src="covers/godot.jpg" width="100%" height="100%">
+          <img class="book" src="covers/godot.jpg" width="100%" height="100%">
         </div>
         <div class="col-md-2 border-right book">
-          <img src="covers/exhalation.jpg" width="100%" height="100%">
+          <img class="book" src="covers/exhalation.jpg" width="100%" height="100%">
         </div>
         <div class="col-md-2 border-right book"></div>
         <div class="col-md-2 book"></div>
+    </div>-->
+
+    <div class="row">
+      <div class="col-6" id="scifi" data-include="scifiBooks">
+      </div>
+      <div class="col-6" id="other" data-include="otherBooks">
+      </div>
     </div>
+
+
+
     <div data-include="footer"></div>
 </body>
 </html>

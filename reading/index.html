@@ -18,7 +18,7 @@
       }
 
       .book{
-        object-fit:contain;
+        /*object-fit:contain;*/
         /*animation: scroll 4s infinite;*/
       }
 
@@ -48,7 +48,6 @@
       -webkit-transform: translate3d(0,-100%, 0);
               transform: translate3d(0,-100%, 0);
       }
-
 
     </style>
   </head>
@@ -81,14 +80,14 @@
     </div>-->
 
     <div class="container">
-      <div class="row">
-        <div class="col-6">
-          <div id="carouselExampleControls" class="carousel vert slide" data-ride="carousel" data-interval="100">
+      <div class="row" style="margin-top:10px;margin-bottom:10px">
+        <div class="col-md-6">
+          <div id="carouselExampleControls" class="carousel vert slide" data-ride="carousel" data-interval="2000">
             <div class="carousel-inner" data-include="scifiBooks"></div>
           </div>
         </div>
-        <div class="col-6">
-          <div id="carouselExampleControls" class="carousel vert slide" data-ride="carousel" data-interval="100">
+        <div class="col-md-6">
+          <div id="carouselExampleControls" class="carousel vert slide" data-ride="carousel" data-interval="2000">
             <div class="carousel-inner" data-include="otherBooks"></div>
         </div>
       </div>

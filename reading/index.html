@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Reading | Wesley Maa | Favorite Books</title>
+    <link rel="shortcut icon" type="image/png" href="../../fav.png?=1"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/loadtemplate.js"></script>
+    <style>
+      .book:hover{
+        transform:scale(1.01);
+
+      }
+
+      .book{
+        /*object-fit:contain;*/
+        /*animation: scroll 4s infinite;*/
+      }
+
+      .covercontainer{
+        margin:5px;
+      }
+
+      .label{
+        font-size:3rem !important;
+        /*background-color:rgb(235, 235, 235);*/
+        width:100%;
+        border-radius:0.25rem;
+        text-indent:1%;
+      }
+
+      @keyframes scroll{
+        from{
+          transform: translateY(0)
+        }
+        to{
+          transform: translateY(100vh)
+        }
+      }
+
+      .vert .carousel-item-next.carousel-item-left,
+      .vert .carousel-item-prev.carousel-item-right {
+          -webkit-transform: translate3d(0, 0, 0);
+                  transform: translate3d(0, 0, 0);
+      }
+
+      .vert .carousel-item-next,
+      .vert .active.carousel-item-right {
+          -webkit-transform: translate3d(0, 100%, 0);
+                  transform: translate3d(0, 100% 0);
+      }
+
+      .vert .carousel-item-prev,
+      .vert .active.carousel-item-left {
+      -webkit-transform: translate3d(0,-100%, 0);
+              transform: translate3d(0,-100%, 0);
+      }
+
+    </style>
+  </head>
+  <body>
+    <div data-include="header"></div>
+
+    <!--
+    <div class="row">
+      <div class="col-6" id="scifi" data-include="scifiBooks">
+      </div>
+      <div class="col-6" id="other" data-include="otherBooks">
+      </div>
+    </div>-->
+
+    <!--
+
+    <div class="container">
+      <div class="row" style="margin-top:10px;margin-bottom:10px">
+        <div class="col-md-6">
+          <div id="carouselExampleControls" class="carousel vert slide" data-ride="carousel" data-interval="2000">
+            <div class="carousel-inner" data-include="scifiBooks"></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div id="carouselExampleControls" class="carousel vert slide" data-ride="carousel" data-interval="2000">
+            <div class="carousel-inner" data-include="otherBooks"></div>
+        </div>
+      </div>
+    </div>
+    </div>-->
+
+    <div class="container" style="margin-top:10px; margin-bottom:10px">
+      <div class="row">
+        <p class="lead label">Philosophy</p>
+      </div>
+      <div class="row" data-include="philosophyBooks"></div>
+      <div class="row">
+        <p class="lead label">Foreign Literature</p>
+      </div>
+      <div class="row" data-include="foreignBooks"></div>
+      <div class="row">
+        <p class="lead label">Science Fiction</p>
+      </div>
+      <div class="row" data-include="scifiBooks"></div>
+      <div class="row">
+        <p class="lead label">Memoirs</p>
+      </div>
+      <div class="row" data-include="memoirBooks"></div>
+      <div class="row">
+        <p class="lead label">Historical Fiction</p>
+      </div>
+      <div class="row" data-include="historicalficBooks"></div>
+      <div class="row">
+        <p class="lead label">Fiction</p>
+      </div>
+      <div class="row" data-include="fictionBooks"></div>
+    </div>
+
+
+
+    <div data-include="footer"></div>
+</body>
+</html>

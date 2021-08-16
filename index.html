@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" style="height:100%">
 <head>
-  <title>Home | Wesley Maa</title>
+  <title>Home | Wesley Maa | Portfolio</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-site-verification" content="c0MiUIwHGLq67czpclnMlzafunnMGTcAuTvXl3N50rg" />
@@ -19,7 +19,9 @@
     function newtab(link){
       window.open('https://' + link, '_blank').focus();
     }
+    
   </script>
+  <scropt src="index.js"></scropt>
   <style>
     :root{
       --secondaryColor : rgb(206, 204, 204);
@@ -44,7 +46,19 @@
       margin-bottom:20px;
     }
     #myCarousel{
-      background-color:var(--secondaryColor);
+      /*background-color:var(--secondaryColor);*/
+    }
+    #remaining{
+      background-color: var(--secondaryColor);
+      flex-grow: 1;
+    }
+
+    .funlinks{
+      margin-top:50%;
+    }
+
+    .iconsub{
+      font-size:0.75rem;
     }
 
   </style>
@@ -52,11 +66,11 @@
 <body style="background-color:#f2f2f2; height:100%;">
   <div class="container-fluid" style="height:100%">
     <div class="row no-gutters" style="height:100%">
-      <div class="col-md-6">
+      <div class="col-md-6 d-flex" style="flex-direction:column">
         <div class="row" style="margin-top:25%">
           <div class="col">
             <h1 class="display-4 text-center">Wesley Maa</h1>
-            <p class="lead text-center">Welcome to my site</p>
+            <p class="lead text-center" data-r481="Yes">High School Student | Passionate Tinkerer</p>
           </div>
         </div>
         <div id="outlinks" class="row d-flex text-center">
@@ -67,7 +81,7 @@
           </div>
           <div class="col-md-3 subpagelink" onclick="redirect('/projects')">
             <p class="lead my-auto">
-              <a href="/projects" class="subpagelink">Projects</a>
+              <a href="/projects" class="subpagelink">Project Portfolio</a>
             </p>
           </div>
           <div class="col-md-3 subpagelink" onclick="redirect('/resume')">
@@ -75,10 +89,31 @@
               <a href="/resume" class="subpagelink">Experiences</a>
             </p>
           </div>
-          <div class="col-md-3 subpagelink" onclick="newtab('github.com')">
+          <div class="col-md-3 subpagelink" onclick="newtab('github.com/WT-MM')">
             <p class="lead my-auto">
               <a href="https://github.com/WT-MM" target="_blank" class="subpagelink">Github</a>
             </p>
+          </div>
+        </div>
+        <!--
+        <div class="row d-flex" id="remaining">
+          <div class="col-md-6 subpagelink" onclick="redirect('/reading')">
+            <p class="lead text-center funlinks">
+              <a href="/reading" class="subpagelink">Reading List</a>
+            </p>
+          </div>
+          <div class="col-md-6 subpagelink" onclick="redirect('/reading')">
+            <p class="lead text-center funlinks">
+              <a href="/reading" class="subpagelink">Reading List</a>
+            </p>
+          </div>
+        </div>-->
+        <div class="row d-flex" style="margin-top:20px">
+          <div class="col-md-2 offset-md-5">
+            <div class="subpagelink" onclick="redirect('/reading')"> 
+              <img src="/imgs/book.png" style="width:100%;height:auto;">
+              <p class="text-center iconsub">Reading List</p>
+            </div>
           </div>
         </div>
         <!--

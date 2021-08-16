@@ -17,6 +17,8 @@ for i in range(len(imgCat)):
 
     for j in glob(imgCat[i] + "*"):
         div = html.new_tag('div')
+        div['class'] = "covercontainer"
+        #Disabled for static book cover page
         '''
         if itr==0:
             div['class'] = "carousel-item active"
@@ -25,9 +27,9 @@ for i in range(len(imgCat)):
         '''
         img = html.new_tag("img")
         img['src'] = j
-        img['width'] = "150px"
-        img['height'] = "auto"
-        img['class'] = "book d-block mx-auto img-fluid" 
+        img['width'] = "auto"
+        img['height'] = "200px"
+        img['class'] = "book d-block mx-auto" 
         div.append(img)
         html.find("body").append(div)
         itr += 1

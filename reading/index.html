@@ -22,6 +22,18 @@
         /*animation: scroll 4s infinite;*/
       }
 
+      .covercontainer{
+        margin:5px;
+      }
+
+      .label{
+        font-size:3rem !important;
+        /*background-color:rgb(235, 235, 235);*/
+        width:100%;
+        border-radius:0.25rem;
+        text-indent:1%;
+      }
+
       @keyframes scroll{
         from{
           transform: translateY(0)
@@ -79,13 +91,31 @@
     </div>
     </div>-->
 
-    <div class="container">
-      <div class="col-md-6" data-include="scifiBooks">
-
+    <div class="container" style="margin-top:10px; margin-bottom:10px">
+      <div class="row">
+        <p class="lead label">Philosophy</p>
       </div>
-      <div class="col-md-6" data-include="otherBooks">
-
+      <div class="row" data-include="philosophyBooks"></div>
+      <div class="row">
+        <p class="lead label">Foreign Literature</p>
       </div>
+      <div class="row" data-include="foreignBooks"></div>
+      <div class="row">
+        <p class="lead label">Science Fiction</p>
+      </div>
+      <div class="row" data-include="scifiBooks"></div>
+      <div class="row">
+        <p class="lead label">Memoirs</p>
+      </div>
+      <div class="row" data-include="memoirBooks"></div>
+      <div class="row">
+        <p class="lead label">Historical Fiction</p>
+      </div>
+      <div class="row" data-include="historicalficBooks"></div>
+      <div class="row">
+        <p class="lead label">Fiction</p>
+      </div>
+      <div class="row" data-include="fictionBooks"></div>
     </div>
 
 

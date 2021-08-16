@@ -45,6 +45,13 @@
       background-color:var(--secondaryColor);
       margin-bottom:20px;
     }
+
+    .iconlink:hover{
+      color:black;
+      text-decoration:none;
+      filter:opacity(0.5);
+    }
+    
     #myCarousel{
       /*background-color:var(--secondaryColor);*/
     }
@@ -108,9 +115,9 @@
             </p>
           </div>
         </div>-->
-        <div class="row d-flex" style="margin-top:20px">
+        <div class="row d-flex" style="margin-top:20px;">
           <div class="col-md-2 offset-md-5">
-            <div class="subpagelink" onclick="redirect('/reading')"> 
+            <div class="iconlink" onclick="redirect('/reading')"> 
               <img src="/imgs/book.png" style="width:100%;height:auto;">
               <p class="text-center iconsub">Reading List</p>
             </div>

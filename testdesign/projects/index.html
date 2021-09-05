@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>My Projects | Wesley Maa</title>
+  <link rel="shortcut icon" type="image/png" href="../fav.png?v=1"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="/js/loadtemplate.js"></script>
+  <script>
+    function redirect(link){
+      window.location=link
+    }
+  </script>
+  <style>
+    .thumbnail{
+      max-width:50%;
+      max-height:auto;
+    }
+
+    .card:hover{
+      opacity:0.8;
+      transform:scale(1.1);
+    }
+
+    .thumblink{
+      color:black;
+    }
+
+    .thumblink:hover{
+      color:black;
+    }
+
+    body{
+      overflow-x:hidden;
+    }
+
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+  <div class="jumbotron" id = "title">
+    <h1 class='text-center'>Wesley Maa</h1>
+    <p class='text-center'>Portfolio</h1>
+  </div>
+  <div class="container-fluid content-row">
+    <div class="row" style="padding-bottom:5%;">
+      <div class="col-md-4">
+        <div class="card h-100 mb-4" onclick="redirect('/projects/JUMP-Robotics')" style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="thumb/jump.png" class="card-img">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><a class="thumblink" href="JUMP-Robotics">JUMP Robotics</a></h5>
+                <p class="card-text">Competitive FIRST Robotics team that I cofounded</p>
+                <p class="card-text">2021 Game Design Award</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 mb-4" onclick="redirect('/projects/MHD-Propulsion')" style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="thumb/2020science.png" class="card-img">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title"><a href="MHD-Propulsion" class="thumblink">Magneto-Hydrodynamic Propulsion</a></h5>
+                <p class="card-text">Synopsys Silicon Valley Science and Technology Championship Science Fair</p><p></p>Office of Naval Science Award </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 mb-4" onclick="redirect('/projects/HaptG')"style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="thumb/haptg.png" class="card-img">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title"><a href="HaptG" class="thumblink">HaptG</a></h5>
+                <p class="card-text">Design of a Wearable Haptic Device for Intuitive Navigation</p><p>UC Santa Barbara research project</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="row" style="padding-bottom:5%;">
+    <div class="col-md-4">
+      <div class="card h-100 mb-4" onclick="redirect('/projects/BWSI-PiPact')" style="max-width: 540px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="thumb/pipact.jpg" class="card-img">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><a href="BWSI-PiPact" class="thumblink">MIT BWSI PiPact</a></h5>
+              <p class="card-text">Bluetooth-based contact tracing for COVID-19 using Raspberry Pis at the Beaver Works Summer Institute</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 mb-4" onclick="redirect('/projects/NUS')" style="max-width: 540px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="thumb/nus.png" class="card-img">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><a href="NUS" class="thumblink">National University of Singapore AI Lab</a></h5>
+              <p class="card-text">Semantic segmentation for processing street-view images and digital mapping</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+</div>
+</div>
+
+
+  <div data-include="footer"></div>
+</body>
+</html>

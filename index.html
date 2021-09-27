@@ -17,13 +17,6 @@
     function newtab(link){
       window.open('https://' + link, '_blank').focus();
     }
-    
-    $(function () {
-    $('.fadein img:gt(0)').hide();
-    setInterval(function () {
-        $('.fadein :first-child').fadeOut().next('img').fadeIn().end().appendTo('.fadein');
-    }, 2000);
-    });
   </script>
   <style>
     :root{
@@ -32,6 +25,7 @@
     .carouselpic{
       height:100%
     }
+
     .subpagelink{
       color:black;
     }
@@ -55,9 +49,6 @@
       filter:opacity(0.5);
     }
     
-    #myCarousel{
-      /*background-color:var(--secondaryColor);*/
-    }
     #remaining{
       background-color: var(--secondaryColor);
       flex-grow: 1;
@@ -80,18 +71,6 @@
       height:30vh;
       top:22%;
       left:20%;
-    }
-
-    .fadein {
-    position:absolute;
-    top:0px;
-    left:50%;
-    margin:auto;
-}
-    .fadein img {
-        position:absolute;
-        left:-65px;
-        top:0;
     }
 
     .mainimg{
@@ -160,13 +139,13 @@
         </div>
         <div id="backgroundCarousel" class="carousel slide" data-ride="carousel" data-interval="30000"> 
           <div class="carousel-inner">
-              <div class="carousel-item active">
+              <div class="carousel-item active imgwrap">
                 <img class="carouselpic mainimg" src="/imgs/background/green.png">
               </div>
-              <div class="carousel-item">
+              <div class="carousel-item imgwrap">
                 <img class="carouselpic mainimg" src="/imgs/background/orange.jpeg">
               </div>
-              <div class="carousel-item">
+              <div class="carousel-item imgwrap">
                 <img class="carouselpic mainimg" src="/imgs/background/winter.png">
               </div>
           </div>

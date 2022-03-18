@@ -16,6 +16,16 @@
     function redirect(link){
       window.location=link
     }
+    function closeWarning(){
+      $(".alert").fadeTo(1000, 0).slideUp(300, function(){
+      $(this).remove();});
+    }
+    $(document).ready(function() {
+      setTimeout(function() {
+        $(".alert").fadeTo(1000, 0).slideUp(300, function(){
+        $(this).remove();});
+      }, 10000);
+    });
   </script>
   <style>
     .thumbnail{
@@ -48,6 +58,11 @@
   </style>
 </head>
 <body>
+  <div id="message" class="alert alert-info alert-dismissible fade show sticky-top text-center" role="alert">
+        <button type="button" class="close" onclick="closeWarning()">&times;</button>
+        This page continues to be a work-in-progress
+    </div>
+</div>
   <div data-include="header"></div>
   <div class="jumbotron" id = "title">
     <h1 class='text-center'>Portfolio</h1>

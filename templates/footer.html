@@ -95,6 +95,34 @@
 #mail:hover{
     filter:brightness(175%);
 }
+
+#socials{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#socials ion-icon{
+    margin:0 10px;
+    /*border: #afafaf 1px solid;*/
+    padding:2px;
+    transition:0.3s;
+}
+
+.square{
+    border-radius: 20%;
+}
+
+.round{
+    border-radius: 50%;
+}
+
+#socials ion-icon:hover{
+    filter:brightness(75%);
+    transform:scale(110%);
+    cursor:pointer;
+}
+
     </style>
 </head>
 
@@ -104,9 +132,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col">Contact me at <a id="mail" href="mailto: wesley.maa@gmail.com">wesley.maa@gmail.com</a></div>
-                    <div class="col item social">
-                        <a href="https://github.com/WT-MM" target="_blank" rel="noopener noreferrer"><i class="icon ion-social-github"></i></a>
-                        <a href="https://www.linkedin.com/in/wesley-maa/" target="_blank" rel="noopener noreferrer"><i class="icon ion-social-linkedin-outline" id="linkedin"></i></a>
+                    <div class="col">
+                      <div class="row" id="socials">
+                        <ion-icon class="round" name="logo-github" onclick='redirNew("https://github.com/WT-MM")' size="large"></ion-icon>
+                        <ion-icon class="square" name="logo-linkedin" onclick='redirNew("https://www.linkedin.com/in/wesley-maa/")' size="large"></ion-icon>
+                        <ion-icon class="square" name="logo-instagram" onclick='redirNew("https://www.instagram.com/wesleytmm/")' size="large"></ion-icon>
+                      </div>
                     </div>
                 </div>
             </div>
@@ -114,6 +145,8 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
-</body>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+
+  </body>
 
 </html>

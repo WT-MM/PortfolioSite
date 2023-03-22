@@ -5,3 +5,7 @@ $(function () {
       $(this).load(file)
     })
   })
+
+  function redirNew(link){
+    window.open(link, '_blank').focus();
+  }

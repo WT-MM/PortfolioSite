@@ -17,6 +17,27 @@
     function newtab(link){
       window.open('https://' + link, '_blank').focus();
     }
+
+    const date = new Date()
+
+    var month = date.getMonth()
+      if(month == 11 || month == 0 || month == 1){
+        var img=2;
+      }
+      else if(month == 2 || month == 3 || month == 4){
+        var img=0;
+      }
+      else if(month == 5 || month == 6 || month == 7){
+        var img=0;
+      }
+      else if(month == 8 || month == 9 || month == 10){
+        var img=1;
+      }
+
+    window.onload = (function(){
+      $('#backgroundCarousel').carousel(img)
+    })
+
   </script>
   <style>
     :root{
@@ -71,6 +92,7 @@
       height:30vh;
       top:22%;
       left:20%;
+      border-radius:10px;
     }
 
     .mainimg{
@@ -134,10 +156,10 @@
     <div class="flex-container maincontent">
       <div style="position:relative">
         <div class="text">
-          <h1 style="object-fit:container;position:absolute;top:10%;left:5%">Wesley Maa</h1>
+          <h1 style="object-fit:container;position:absolute;top:10%;left:5%;margin-top:10px;">Wesley Maa</h1>
           <p style="font-size:1.5rem;object-fit:container;position:absolute;top:50%;left:5%">High School Student | Passionate Tinkerer</p>
         </div>
-        <div id="backgroundCarousel" class="carousel slide" data-ride="carousel" data-interval="30000"> 
+        <div id="backgroundCarousel" class="carousel slide" data-ride="carousel" data-interval="30000">           
           <div class="carousel-inner">
               <div class="carousel-item active imgwrap">
                 <img class="carouselpic mainimg" src="/imgs/background/green.png">

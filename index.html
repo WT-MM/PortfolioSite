@@ -34,6 +34,7 @@
         var img=1;
       }
 
+
     window.onload = (function(){
       $('#backgroundCarousel').carousel(img)
     })
@@ -46,6 +47,32 @@
     .carouselpic{
       height:100%
     }
+
+    .carousel-fade .carousel-item {
+ opacity: 0;
+ transition: opacity 1s;
+}
+
+.carousel-fade  .carousel-item.active,
+.carousel-fade  .carousel-item-next.carousel-item-left,
+.carousel-fade  .carousel-item-prev.carousel-item-right {
+  opacity: 1;
+
+}
+
+.carousel-fade .active.carousel-item-left,
+.carousel-fade  .active.carousel-item-right {
+ opacity: 0;
+}
+
+.carousel-fade  .carousel-item-next,
+.carousel-fade .carousel-item-prev,
+.carousel-fade .carousel-item.active,
+.carousel-fade .active.carousel-item-left,
+.carousel-fade  .active.carousel-item-prev {
+ transform: translateX(0);
+ transform: translate3d(0, 0, 0);
+}
 
     .subpagelink{
       color:black;
@@ -114,14 +141,16 @@
 
 
 
-    @media screen and (max-width: 804px) {
-      .text{
-        width:300px;
-        height:200px;
-        top: 10%;
-        left:15%;
-      }
+    @media screen and (max-width: 804px){
+    .text{
+      width: 300px;
+      height: 200px;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
 }
+
 
 
   </style>
@@ -159,7 +188,7 @@
           <h1 style="object-fit:container;position:absolute;top:10%;left:5%;margin-top:10px;">Wesley Maa</h1>
           <p style="font-size:1.5rem;object-fit:container;position:absolute;top:50%;left:5%">High School Student | Passionate Tinkerer</p>
         </div>
-        <div id="backgroundCarousel" class="carousel slide" data-ride="carousel" data-interval="30000">           
+        <div id="backgroundCarousel" class="carousel slide carousel-fade" data-ride="carousel" data-interval="30000">
           <div class="carousel-inner">
               <div class="carousel-item active imgwrap">
                 <img class="carouselpic mainimg" src="/imgs/background/green.png">

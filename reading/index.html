@@ -12,26 +12,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/js/loadtemplate.js"></script>
     <style>
-      .book:hover{
-        transform:scale(1.01);
-
-      }
-
-      .book{
-        /*object-fit:contain;*/
-        /*animation: scroll 4s infinite;*/
-      }
+        .book:hover {
+            transform: scale(1.02);
+        }
+        .book {
+            transition: transform 0.4s ease;
+            border-radius: 1px;
+        }
+        .label {
+            font-size: 1.5rem !important; /* Adjusted for better mobile visibility */
+            width: 100%;
+            text-indent: 1%;
+        }
 
       .covercontainer{
         margin:5px;
-      }
-
-      .label{
-        font-size:3rem !important;
-        /*background-color:rgb(235, 235, 235);*/
-        width:100%;
-        border-radius:0.25rem;
-        text-indent:1%;
       }
 
       @keyframes scroll{

@@ -1,6 +1,5 @@
 from glob import glob
 from bs4 import BeautifulSoup
-from PIL import Image
 import os
 
 

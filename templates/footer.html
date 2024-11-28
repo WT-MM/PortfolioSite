@@ -96,13 +96,16 @@
 }
 
 #socials{
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 24px;
+    width: 100%;
 }
 
 #socials svg {
-    margin: 0 10px;
+    margin: 0;
     padding: 2px;
     transition: 0.3s;
     width: 35px;
@@ -122,6 +125,19 @@
 
 .round {
     border-radius: 50%;
+}
+
+@media (max-width: 767px) {
+    #socials svg {
+        width: 30px;
+        height: 30px;
+    }
+    #socials {
+        gap: 16px;
+    }
+    .col {
+        font-size: 14px;
+    }
 }
 
 </style>

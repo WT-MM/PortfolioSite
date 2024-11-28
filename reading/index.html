@@ -12,49 +12,88 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/js/loadtemplate.js"></script>
     <style>
-        .book:hover {
-            transform: scale(1.02);
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
         .book {
             transition: transform 0.4s ease;
-            border-radius: 1px;
+            border-radius: 4px;
+            height: 250px;
+            width: auto;
+            object-fit: cover;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .label {
-            font-size: 1.5rem !important; /* Adjusted for better mobile visibility */
+
+        .book:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .covercontainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
             width: 100%;
-            text-indent: 1%;
+            margin-bottom: 40px;
+            max-width: 1200px;
+            padding: 0 20px;
         }
 
-      .covercontainer{
-        margin:5px;
-      }
-
-      @keyframes scroll{
-        from{
-          transform: translateY(0)
+        .label {
+            font-size: 2rem !important;
+            font-weight: 300;
+            color: #333;
+            padding: 2rem 20px 1rem 20px;
+            border-bottom: 2px solid #eee;
+            margin: 0 0 2rem 0;
+            width: 100%;
+            max-width: 1200px;
         }
-        to{
-          transform: translateY(100vh)
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .book {
+                height: 200px;
+            }
+            
+            .label {
+                font-size: 1.5rem !important;
+                margin: 0 0 1.5rem 0;
+                padding: 1.5rem 15px 1rem 15px;
+            }
+            
+            .book-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                padding: 0 15px;
+            }
         }
-      }
 
-      .vert .carousel-item-next.carousel-item-left,
-      .vert .carousel-item-prev.carousel-item-right {
-          -webkit-transform: translate3d(0, 0, 0);
-                  transform: translate3d(0, 0, 0);
-      }
-
-      .vert .carousel-item-next,
-      .vert .active.carousel-item-right {
-          -webkit-transform: translate3d(0, 100%, 0);
-                  transform: translate3d(0, 100% 0);
-      }
-
-      .vert .carousel-item-prev,
-      .vert .active.carousel-item-left {
-      -webkit-transform: translate3d(0,-100%, 0);
-              transform: translate3d(0,-100%, 0);
-      }
+        @media (max-width: 375px) {
+            .book-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .book {
+                height: 280px;
+            }
+        }
 
     </style>
   </head>
@@ -86,34 +125,40 @@
     </div>-->
 
     <div class="container" style="margin-top:10px; margin-bottom:10px">
-      <div class="row">
-        <p class="lead label">Philosophy</p>
-      </div>
-      <div class="row" data-include="philosophyBooks"></div>
-      <div class="row">
-        <p class="lead label">Foreign Literature</p>
-      </div>
-      <div class="row" data-include="foreignBooks"></div>
-      <div class="row">
-        <p class="lead label">Science Fiction</p>
-      </div>
-      <div class="row" data-include="scifiBooks"></div>
-      <div class="row">
-        <p class="lead label">Memoirs</p>
-      </div>
-      <div class="row" data-include="memoirBooks"></div>
-      <div class="row">
-        <p class="lead label">Non Fiction</p>
-      </div>
-      <div class="row" data-include="nonfictionBooks"></div>
-      <div class="row">
-        <p class="lead label">Historical Fiction</p>
-      </div>
-      <div class="row" data-include="historicalficBooks"></div>
-      <div class="row">
-        <p class="lead label">Fiction</p>
-      </div>
-      <div class="row" data-include="fictionBooks"></div>
+        <div class="row">
+            <p class="lead label">Philosophy</p>
+        </div>
+        <div class="book-grid" data-include="philosophyBooks"></div>
+        
+        <div class="row">
+            <p class="lead label">Foreign Literature</p>
+        </div>
+        <div class="book-grid" data-include="foreignBooks"></div>
+        
+        <div class="row">
+            <p class="lead label">Science Fiction</p>
+        </div>
+        <div class="book-grid" data-include="scifiBooks"></div>
+        
+        <div class="row">
+            <p class="lead label">Memoirs</p>
+        </div>
+        <div class="book-grid" data-include="memoirBooks"></div>
+        
+        <div class="row">
+            <p class="lead label">Non Fiction</p>
+        </div>
+        <div class="book-grid" data-include="nonfictionBooks"></div>
+        
+        <div class="row">
+            <p class="lead label">Historical Fiction</p>
+        </div>
+        <div class="book-grid" data-include="historicalficBooks"></div>
+        
+        <div class="row">
+            <p class="lead label">Fiction</p>
+        </div>
+        <div class="book-grid" data-include="fictionBooks"></div>
     </div>
 
 

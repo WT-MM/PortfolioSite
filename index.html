@@ -7,9 +7,9 @@
   <meta name="google-site-verification" content="c0MiUIwHGLq67czpclnMlzafunnMGTcAuTvXl3N50rg" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="shortcut icon" type="image/png" href="fav.png?v=1"/>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script defer src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script>
     function redirect(link){
       window.location=link
@@ -18,26 +18,28 @@
       window.open('https://' + link, '_blank').focus();
     }
 
-    const date = new Date()
+    function getSeasonalImageIndex() {
+      const month = new Date().getMonth();
+      const seasons = {
+        winter: [11, 0, 1],
+        spring: [2, 3, 4],
+        summer: [5, 6, 7],
+        fall: [8, 9, 10]
+      };
+      
+      for (const [season, months] of Object.entries(seasons)) {
+        if (months.includes(month)) {
+          return season === 'winter' ? 2 : 
+                 season === 'spring' ? 0 :
+                 season === 'fall' ? 1 : 0;
+        }
+      }
+      return 0;
+    }
 
-    var month = date.getMonth()
-      if(month == 11 || month == 0 || month == 1){
-        var img=2;
-      }
-      else if(month == 2 || month == 3 || month == 4){
-        var img=0;
-      }
-      else if(month == 5 || month == 6 || month == 7){
-        var img=0;
-      }
-      else if(month == 8 || month == 9 || month == 10){
-        var img=1;
-      }
-
-
-    window.onload = (function(){
-      $('#backgroundCarousel').carousel(img)
-    })
+    window.addEventListener('load', function() {
+      $('#backgroundCarousel').carousel(getSeasonalImageIndex());
+    });
 
   </script>
   <style>
@@ -133,27 +135,32 @@
       }
     }
 
-    @media screen and (max-width:804px){
-      .mainimg{
-        height:100vh;
+    @media screen and (max-width: 804px) {
+      .mainimg {
+        height: 100vh;
+      }
+      
+      .text {
+        width: 300px;
+        height: 200px;
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
       }
     }
 
-
-
-    @media screen and (max-width: 804px){
-    .text{
-      width: 300px;
-      height: 200px;
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%);
+    .navbar {
+      z-index: 2;
     }
-}
-
-
 
   </style>
+  <link rel="preconnect" href="https://maxcdn.bootstrapcdn.com">
+  <link rel="preconnect" href="https://code.jquery.com">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preload" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  </noscript>
 </head>
 <body style="background-color:#f2f2f2; height:100%;overflow:hidden;">
     <nav class="navbar navbar-expand-sm bg-light navbar-light" style="z-index:2;">
@@ -201,10 +208,6 @@
               </div>
           </div>
       </div>
-      <!--
-        <div style="position:relative">
-          <img class="mainimg" src="temp.jpeg">
-        </div>-->
       </div>
     </div>
 </body>

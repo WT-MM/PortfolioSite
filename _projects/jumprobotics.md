@@ -1,7 +1,7 @@
 ---
 layout: project
 title: JUMP Robotics
-description: Robotics Team Project
+description: FIRST Robotics Team
 permalink: /projects/jumprobotics/
 ---
 

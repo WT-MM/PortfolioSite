@@ -1,0 +1,132 @@
+---
+---
+
+// Variables
+:root {
+  --secondaryColor: rgb(206, 204, 204);
+}
+
+// Global styles
+body {
+  overflow-x: hidden;
+}
+
+// Navigation styles
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+// Home page styles
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.maincontent {
+  flex: 1;
+}
+
+.text {
+  z-index: 2;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.carouselpic {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+// About page styles
+#aboutme {
+  padding-left: 1.5rem;
+  font-size: 1.3vw;
+}
+
+.equal-height {
+  display: flex;
+  flex-wrap: cover;
+}
+
+.equal-height img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 100%;
+}
+
+// Projects page styles
+.thumbnail {
+  max-width: 50%;
+  max-height: auto;
+}
+
+// Footer styles
+#socials {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.round, .square {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+// Responsive styles
+@media screen and (max-width: 760px) {
+  #aboutme {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (min-width: 804px) {
+  .mainimg {
+    height: auto;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 804px) {
+  .mainimg {
+    height: 100vh;
+  }
+  
+  .text {
+    width: 300px;
+    height: 200px;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.project {
+    img {
+        max-width: 100%;
+        height: auto;
+        margin: 1rem 0;
+    }
+    
+    video {
+        max-width: 100%;
+        height: auto;
+        margin: 1rem 0;
+    }
+    
+    .jumbotron {
+        margin-bottom: 2rem;
+        background-color: #e9ecef;
+    }
+}
+
+// Reading list styles
+.list-group-item {
+    background-color: transparent;
+    border: 1px solid rgba(0,0,0,.125);
+}

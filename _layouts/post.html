@@ -1,0 +1,43 @@
+---
+layout: default
+---
+<link rel="stylesheet" href="/assets/css/thoughts.css">
+<div class="container mt-3">
+  <article class="post">
+    <header class="post-header bg-white rounded-lg shadow-sm mb-8">
+      <div class="space-y-2 text-center">
+        <dl>
+          <div>
+            <dt class="sr-only">Published on</dt>
+            <dd class="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+              <time datetime="{{ page.date | date_to_xmlschema }}">
+                {{ page.date | date: "%A, %B %-d, %Y" }}
+              </time>
+            </dd>
+          </div>
+        </dl>
+        <div>
+          <h1 class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
+            {{ page.title }}
+          </h1>
+        </div>
+        {% if page.tags %}
+        <div class="post-tags justify-center py-2">
+          {% for tag in page.tags %}
+            <a href="/thoughts/tags/{{ tag }}" class="tag-link">{{ tag }}</a>
+          {% endfor %}
+        </div>
+        {% endif %}
+        {% if page.description %}
+        <div class="mx-auto max-w-prose text-sm text-gray-700 dark:text-gray-300">
+          <p>{{ page.description }}</p>
+        </div>
+        {% endif %}
+      </div>
+    </header>
+
+    <div class="prose max-w-none flex-1 pb-8 pt-10 dark:prose-invert">
+      {{ content }}
+    </div>
+  </article>
+</div>

@@ -1,0 +1,28 @@
+---
+layout: default
+---
+
+<div class="project">
+  {% if page.video_banner or page.image_banner %}
+  <div class="banner-container">
+    {% if page.video_banner %}
+    <video class="banner-media" autoplay loop muted playsinline>
+      <source src="{{ page.video_banner }}" type="video/mp4">
+    </video>
+    {% elsif page.image_banner %}
+    <img class="banner-media" src="{{ page.image_banner }}" alt="{{ page.title }} banner">
+    {% endif %}
+  </div>
+  {% endif %}
+
+  <div class="project-content">
+      {% if page.external_url %}
+      <p class="text-center" style="padding-top: 30px;">
+        <a href="{{ page.external_url }}" target="_blank" class="btn btn-primary">Visit Project Website</a>
+      </p>
+      {% endif %}
+    </div>
+    
+    {{ content }}
+  </div>
+</div>

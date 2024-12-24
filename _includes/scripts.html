@@ -1,0 +1,15 @@
+<script>
+function redirect(link) {
+  window.location = link;
+}
+
+function redirNew(link) {
+  window.open(link, '_blank').focus();
+}
+
+function closeWarning() {
+  $(".alert").fadeTo(1000, 0).slideUp(300, function() {
+    $(this).remove();
+  });
+}
+</script>

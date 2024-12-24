@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% if page.title %}{{ page.title }} | {% endif %}Wesley Maa</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <link rel="shortcut icon" type="image/png" href="/assets/images/fav.png?v=1"/>
+    {% include head.html %}
+    {% if page.custom_css %}
+    <link rel="stylesheet" href="/assets/css/{{ page.custom_css }}">
+    {% endif %}
+    <style>
+        #aboutme {
+            padding-left: 1.5rem;
+            font-size: 1.3vw;
+        }
+
+        .equal-height {
+            display: flex;
+            flex-wrap: cover;
+        }
+
+        .equal-height img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 100%;
+        }
+
+        @media screen and (max-width: 760px) {
+            #aboutme {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% include header.html %}
+    {{ content }}
+    {% include footer.html %}
+</body>
+</html>

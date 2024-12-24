@@ -1,0 +1,38 @@
+title: Wesley Maa
+description: Wesley Maa's Personal Website
+url: "https://wesleymaa.com"
+baseurl: ""
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Collections
+collections:
+  projects:
+    output: true
+    permalink: /projects/:path/
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+  - scope:
+      path: "_posts"
+    values:
+      layout: "post"
+  - scope:
+      path: "_projects"
+    values:
+      layout: "project"
+
+exclude:
+  - old/
+  - .gitignore
+  - Gemfile
+  - Gemfile.lock
+  - README.md

@@ -1,0 +1,34 @@
+---
+layout: default
+---
+<div class="jumbotron" id="title">
+    <h1 class='text-center'>Thoughts</h1>
+</div>
+
+<link rel="stylesheet" href="/assets/css/thoughts.css">
+<div class="thoughts-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h3>Tags</h3>
+        <ul class="tag-list">
+            <li>
+                <a href="/thoughts/" class="{% if page.url == '/thoughts/' %}active{% endif %}">
+                    All ({{ site.posts.size }})
+                </a>
+            </li>
+            {% assign tags = site.tags | sort %}
+            {% for tag in tags %}
+                <li>
+                    <a href="/thoughts/tags/{{ tag[0] }}/" class="{% if page.url contains tag[0] %}active{% endif %}">
+                        {{ tag[0] }} ({{ tag[1].size }})
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main-content">
+        {{ content }}
+    </main>
+</div>

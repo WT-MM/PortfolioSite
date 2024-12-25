@@ -19,7 +19,7 @@ layout: default
             {% assign tags = site.tags | sort %}
             {% for tag in tags %}
                 <li>
-                    <a href="/thoughts/tags/{{ tag[0] }}/" class="{% if page.url contains tag[0] %}active{% endif %}">
+                    <a href="/thoughts/tags/{{ tag[0] }}/" class="{% if page.tag == tag[0] %}active{% endif %}">
                         {{ tag[0] }} ({{ tag[1].size }})
                     </a>
                 </li>

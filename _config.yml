@@ -2,6 +2,8 @@ title: Wesley Maa
 description: Wesley Maa's Personal Website
 url: "https://wesleymaa.com"
 baseurl: ""
+permalink: "/:year/:month-:day/:title/"
+date_format: "%Y/%B-%d/%title"
 
 # Build settings
 markdown: kramdown
@@ -23,6 +25,7 @@ defaults:
       layout: "default"
   - scope:
       path: "_posts"
+      type: "posts"
     values:
       layout: "post"
   - scope:

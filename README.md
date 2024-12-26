@@ -1,6 +1,6 @@
 # PortfolioSite
 
-Static site for me and various things I want to share
+Static site for myself and the various things I want to share
 
 ## Requirements
 
@@ -14,8 +14,9 @@ brew install ruby
 gem install bundler
 ```
 
-You may need to use `rbenv` to install a version of Ruby that works with Bundler.
+You may need to use `rbenv` to install a version of Ruby that works with Bundler. 
 
+For example: 
 ```bash
 brew install rbenv
 rbenv install 3.3.6

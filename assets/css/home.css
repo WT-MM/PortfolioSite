@@ -33,7 +33,7 @@
 
 .text {
   position: absolute;
-  opacity: 90%;
+  opacity: 0.9;
   background-color: var(--secondaryColor);
   z-index: 1;
   width: 40vw;
@@ -42,6 +42,9 @@
   left: 20%;
   border-radius: 10px;
   color: #333;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .text h1, .text p {
@@ -123,4 +126,13 @@
 
 .maincontent {
   height: 100%;
+}
+
+.text-preload {
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+
+.text-loaded {
+  opacity: 0.9;
 }

@@ -17,6 +17,25 @@ function getSeasonalImageIndex() {
   return 0;
 }
 
+// Preload next image
+function preloadNextImage(index) {
+  const items = document.querySelectorAll('.carousel-item img');
+  const nextIndex = (index + 1) % items.length;
+  const nextImage = new Image();
+  nextImage.src = items[nextIndex].src;
+}
+
 window.addEventListener('load', function() {
-  $('#backgroundCarousel').carousel(getSeasonalImageIndex());
+  const seasonalIndex = getSeasonalImageIndex();
+  $('#backgroundCarousel').carousel(seasonalIndex);
+  preloadNextImage(seasonalIndex);
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const textElement = document.querySelector('.text-preload');
+  if (textElement) {
+    requestAnimationFrame(() => {
+      textElement.classList.add('text-loaded');
+    });
+  }
 });

@@ -4,11 +4,17 @@
 // Variables
 :root {
   --secondaryColor: rgb(206, 204, 204);
+  --font-primary: 'Sarala', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 // Global styles
 body {
   overflow-x: hidden;
+  font-family: var(--font-primary);
+}
+
+* {
+  font-family: var(--font-primary);
 }
 
 // Navigation styles

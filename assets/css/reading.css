@@ -35,6 +35,7 @@
     margin: 0 0 2rem 0;
     width: 100%;
     max-width: 1200px;
+    scroll-margin-top: 80px;
 }
 
 @media (max-width: 768px) {
@@ -63,4 +64,8 @@
     .book {
         height: 280px;
     }
+}
+
+html {
+    scroll-behavior: smooth;
 }

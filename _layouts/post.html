@@ -2,7 +2,19 @@
 layout: default
 ---
 <link rel="stylesheet" href="/assets/css/thoughts.css">
-<div class="container mt-3">
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true
+    }
+  });
+</script>
+<div class="container mt-3" style="padding-bottom: 3vh;">
   <article class="post">
     <header class="post-header bg-white rounded-lg shadow-sm mb-8">
       <div class="space-y-2 text-center">
@@ -36,7 +48,7 @@ layout: default
       </div>
     </header>
 
-    <div class="prose max-w-none flex-1 pb-8 pt-10 dark:prose-invert">
+    <div class="prose max-w-none flex-1 pb-8 pt-10 dark:prose-invert; post-content">
       {{ content }}
     </div>
   </article>

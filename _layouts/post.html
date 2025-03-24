@@ -14,7 +14,7 @@ layout: default
     }
   });
 </script>
-<div class="container mt-3" style="padding-bottom: 3vh;">
+<div class="container-fluid post-container mt-3" style="padding-bottom: 3vh;">
   <article class="post">
     <header class="post-header bg-white rounded-lg shadow-sm mb-8">
       <div class="space-y-2 text-center">
@@ -48,8 +48,205 @@ layout: default
       </div>
     </header>
 
-    <div class="prose max-w-none flex-1 pb-8 pt-10 dark:prose-invert; post-content">
-      {{ content }}
+    <div class="post-content-wrapper">
+      <div id="toc" class="table-of-contents">
+        <h3>Contents</h3>
+        <ul id="toc-list"></ul>
+      </div>
+      <div class="prose max-w-none flex-1 pb-8 pt-4 dark:prose-invert post-content">
+        {{ content }}
+      </div>
     </div>
   </article>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Get all headings in the post content
+  const headings = document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3, .post-content h4');
+  const tocList = document.getElementById('toc-list');
+  const toc = document.getElementById('toc');
+  
+  // If no headings, hide the TOC
+  if (headings.length === 0) {
+    toc.style.display = 'none';
+    return;
+  }
+  
+  // Create TOC structure with collapsible sections
+  let currentH2Item = null;
+  let currentH2List = null;
+  
+  // Add IDs to headings if they don't have one
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      heading.id = 'heading-' + index;
+    }
+    
+    const level = parseInt(heading.tagName.charAt(1));
+    
+    // Create TOC entry
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = '#' + heading.id;
+    a.textContent = heading.textContent;
+    a.setAttribute('data-level', level);
+    
+    // Add click event to scroll smoothly
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        // Offset for fixed header if needed
+        const offset = 80;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - offset;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+        
+        // Update URL hash without jumping
+        history.pushState(null, null, '#' + targetId);
+      }
+    });
+    
+    // Handle nesting based on heading level
+    if (level === 1 || level === 2) {
+      // h1 and h2 headings go directly in the main list
+      li.className = 'toc-level-' + level;
+      
+      // For h2, create a container for potential h3 children
+      if (level === 2) {
+        currentH2Item = li;
+        
+        // Create toggle button for h2
+        const toggleBtn = document.createElement('button');
+        toggleBtn.className = 'toc-toggle';
+        toggleBtn.innerHTML = '&#9654;'; // Right-pointing triangle
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        toggleBtn.setAttribute('aria-label', 'Expand section');
+        
+        // Create nested list for h3 items (initially hidden)
+        currentH2List = document.createElement('ul');
+        currentH2List.className = 'toc-sublist collapsed';
+        
+        // Toggle button functionality
+        toggleBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const isExpanded = this.getAttribute('aria-expanded') === 'true';
+          this.setAttribute('aria-expanded', !isExpanded);
+          this.setAttribute('aria-label', isExpanded ? 'Expand section' : 'Collapse section');
+          this.innerHTML = isExpanded ? '&#9654;' : '&#9660;'; // Triangle pointing right or down
+          
+          const sublist = this.parentNode.querySelector('.toc-sublist');
+          if (sublist) {
+            sublist.classList.toggle('collapsed');
+          }
+        });
+        
+        // Add the link and then the toggle button
+        li.appendChild(a);
+        li.appendChild(toggleBtn);
+        
+        // Append the nested list to li
+        li.appendChild(currentH2List);
+        tocList.appendChild(li);
+      } else {
+        // For h1, just append the link
+        li.appendChild(a);
+        tocList.appendChild(li);
+        currentH2Item = null;
+        currentH2List = null;
+      }
+    } else if (level === 3 || level === 4) {
+      // h3 and h4 are nested under their parent h2
+      li.className = 'toc-level-' + (level - 2); // Adjust indentation within sublist
+      li.appendChild(a);
+      
+      if (currentH2List) {
+        currentH2List.appendChild(li);
+      } else {
+        // If there's no parent h2, add directly to main list with proper indentation
+        li.className = 'toc-level-' + level;
+        tocList.appendChild(li);
+      }
+    }
+  });
+  
+  // Update active TOC item on scroll
+  window.addEventListener('scroll', function() {
+    const scrollPosition = window.scrollY;
+    const tocLinks = document.querySelectorAll('#toc-list a');
+    
+    // Find which heading is currently in view
+    let currentActiveIndex = -1;
+    let currentHeading = null;
+    
+    // Iterate in reverse to find the last heading that is above current scroll position
+    for (let i = headings.length - 1; i >= 0; i--) {
+      const headingTop = headings[i].getBoundingClientRect().top + window.scrollY;
+      if (scrollPosition >= headingTop - 100) {
+        currentActiveIndex = i;
+        currentHeading = headings[i];
+        break;
+      }
+    }
+    
+    // If no heading is found (we're above all headings), highlight the first
+    if (currentActiveIndex === -1 && headings.length > 0) {
+      currentActiveIndex = 0;
+      currentHeading = headings[0];
+    }
+    
+    // Update active classes
+    tocLinks.forEach(link => {
+      link.classList.remove('active');
+    });
+    
+    if (currentHeading) {
+      // Find the corresponding TOC link and activate it
+      const activeLink = document.querySelector(`#toc-list a[href="#${currentHeading.id}"]`);
+      if (activeLink) {
+        activeLink.classList.add('active');
+        
+        // If this is an h3 under a collapsed section, expand it
+        const level = parseInt(activeLink.getAttribute('data-level'));
+        if (level === 3 || level === 4) {
+          const parentList = activeLink.closest('.toc-sublist');
+          if (parentList && parentList.classList.contains('collapsed')) {
+            // Find the toggle button in the parent li and click it
+            const parentLi = parentList.closest('li');
+            if (parentLi) {
+              const toggleBtn = parentLi.querySelector('.toc-toggle');
+              if (toggleBtn) {
+                toggleBtn.click();
+              }
+            }
+          }
+          
+          // Make sure active item is visible in scrollable container
+          if (tocList.scrollHeight > tocList.clientHeight) {
+            const activeItemTop = activeLink.offsetTop;
+            const activeItemHeight = activeLink.offsetHeight;
+            const tocVisibleTop = tocList.scrollTop;
+            const tocVisibleBottom = tocVisibleTop + tocList.clientHeight;
+            
+            if (activeItemTop < tocVisibleTop || activeItemTop + activeItemHeight > tocVisibleBottom) {
+              tocList.scrollTo({
+                top: activeItemTop - tocList.clientHeight / 2,
+                behavior: 'smooth'
+              });
+            }
+          }
+        }
+      }
+    }
+  });
+  
+  // Trigger scroll event to highlight initial active heading
+  window.dispatchEvent(new Event('scroll'));
+});
+</script>

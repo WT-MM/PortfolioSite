@@ -1,0 +1,56 @@
+{% capture tocWorkspace %}
+    {% comment %}
+        Based on jekyll-toc by allejo
+        https://github.com/allejo/jekyll-toc
+    {% endcomment %}
+
+    {% assign nodes = include.html | split: '<h' %}
+    {% assign minHeader = include.h_min | default: 1 %}
+    {% assign maxHeader = include.h_max | default: 6 %}
+    {% assign firstHeader = true %}
+    {% assign counter = 0 %}
+
+    {% capture my_toc %}{% endcapture %}
+
+    {% for node in nodes %}
+        {% if node == "" %}
+            {% continue %}
+        {% endif %}
+
+        {% assign headerLevel = node | replace: '"', '' | slice: 0, 1 | times: 1 %}
+
+        {% if headerLevel < minHeader or headerLevel > maxHeader %}
+            {% continue %}
+        {% endif %}
+
+        {% assign _workspace = node | split: '</h' %}
+
+        {% assign _idWorkspace = _workspace[0] | split: 'id="' %}
+        {% assign _idWorkspace = _idWorkspace[1] | split: '"' %}
+        {% assign html_id = _idWorkspace[0] %}
+
+        {% assign _titleWorkspace = _workspace[0] | split: '>' %}
+        {% assign _titleWorkspace = _titleWorkspace[1] | split: '<' %}
+        {% assign header = _titleWorkspace[0] | strip %}
+
+        {% assign space = '' %}
+        {% for i in (1..headerLevel) %}
+            {% assign space = space | prepend: '    ' %}
+        {% endfor %}
+
+        {% if firstHeader %}
+            {% assign firstHeader = false %}
+            {% assign minHeader = headerLevel %}
+        {% endif %}
+
+        {% capture my_toc %}{{ my_toc }}
+{{ space }}- [{{ header }}](#{{ html_id }}){% endcapture %}
+    {% endfor %}
+
+    {% if include.class %}
+        {% capture my_toc %}{:.{{ include.class }}}
+{{ my_toc | normalize_whitespace }}{% endcapture %}
+    {% endif %}
+
+    {{ my_toc | normalize_whitespace }}
+{% endcapture %}{{ tocWorkspace | strip }} 

@@ -73,6 +73,24 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
   
+  // First, identify which h2 headings have h3 children
+  const h2WithChildren = new Map();
+  let currentH2 = null;
+  
+  // Pre-process to identify h2 headings with children
+  for (let i = 0; i < headings.length; i++) {
+    const heading = headings[i];
+    const level = parseInt(heading.tagName.charAt(1));
+    
+    if (level === 2) {
+      currentH2 = heading;
+      h2WithChildren.set(currentH2.id || `heading-${i}`, false); // Mark as having no children initially
+    } else if (level === 3 && currentH2) {
+      // Found an h3 under current h2, mark this h2 as having children
+      h2WithChildren.set(currentH2.id || `heading-${i-1}`, true);
+    }
+  }
+  
   // Create TOC structure with collapsible sections
   let currentH2Item = null;
   let currentH2List = null;
@@ -118,41 +136,50 @@ document.addEventListener('DOMContentLoaded', function() {
       // h1 and h2 headings go directly in the main list
       li.className = 'toc-level-' + level;
       
-      // For h2, create a container for potential h3 children
+      // For h2, check if it has h3 children
       if (level === 2) {
         currentH2Item = li;
+        const hasChildren = h2WithChildren.get(heading.id);
         
-        // Create toggle button for h2
-        const toggleBtn = document.createElement('button');
-        toggleBtn.className = 'toc-toggle';
-        toggleBtn.innerHTML = '&#9654;'; // Right-pointing triangle
-        toggleBtn.setAttribute('aria-expanded', 'false');
-        toggleBtn.setAttribute('aria-label', 'Expand section');
-        
-        // Create nested list for h3 items (initially hidden)
-        currentH2List = document.createElement('ul');
-        currentH2List.className = 'toc-sublist collapsed';
-        
-        // Toggle button functionality
-        toggleBtn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          const isExpanded = this.getAttribute('aria-expanded') === 'true';
-          this.setAttribute('aria-expanded', !isExpanded);
-          this.setAttribute('aria-label', isExpanded ? 'Expand section' : 'Collapse section');
-          this.innerHTML = isExpanded ? '&#9654;' : '&#9660;'; // Triangle pointing right or down
+        // Only create toggle button and sublist if this h2 has children
+        if (hasChildren) {
+          // Create toggle button for h2
+          const toggleBtn = document.createElement('button');
+          toggleBtn.className = 'toc-toggle';
+          toggleBtn.innerHTML = '&#9654;'; // Right-pointing triangle
+          toggleBtn.setAttribute('aria-expanded', 'false');
+          toggleBtn.setAttribute('aria-label', 'Expand section');
           
-          const sublist = this.parentNode.querySelector('.toc-sublist');
-          if (sublist) {
-            sublist.classList.toggle('collapsed');
-          }
-        });
+          // Create nested list for h3 items (initially hidden)
+          currentH2List = document.createElement('ul');
+          currentH2List.className = 'toc-sublist collapsed';
+          
+          // Toggle button functionality
+          toggleBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            this.setAttribute('aria-label', isExpanded ? 'Expand section' : 'Collapse section');
+            this.innerHTML = isExpanded ? '&#9654;' : '&#9660;'; // Triangle pointing right or down
+            
+            const sublist = this.parentNode.querySelector('.toc-sublist');
+            if (sublist) {
+              sublist.classList.toggle('collapsed');
+            }
+          });
+          
+          // Add the link and then the toggle button
+          li.appendChild(a);
+          li.appendChild(toggleBtn);
+          
+          // Append the nested list to li
+          li.appendChild(currentH2List);
+        } else {
+          // No children, just add the link without toggle
+          li.appendChild(a);
+          currentH2List = null; // No sublist for this h2
+        }
         
-        // Add the link and then the toggle button
-        li.appendChild(a);
-        li.appendChild(toggleBtn);
-        
-        // Append the nested list to li
-        li.appendChild(currentH2List);
         tocList.appendChild(li);
       } else {
         // For h1, just append the link

@@ -80,6 +80,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const noiseScale = 0.3; // feature size of Perlin noise
     const timeNoiseScale = 0.01; // speed of noise animation
 
+    // Mouse interaction for text zone background
+    let mouseEffectCenter = null;
+    let lastMouseMoveInTextZoneTime = 0;
+    const MOUSE_EFFECT_DURATION = 1000; // ms - How long the effect lasts after mouse stops
+    const MOUSE_EFFECT_RADIUS = 6;   // grid cells - How far the effect spreads
+    const MOUSE_EFFECT_SHIFT_MAGNITUDE = 7; // How much to shift noise time
+
     function updateActiveLeniaParams() {
         const preset = KERNEL_PRESETS[SELECTED_KERNEL_TYPE];
         if (!preset) {
@@ -244,8 +251,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function drawGrid() {
         if (!grid || grid.length === 0 || !ctx) return;
-        ctx.fillStyle = 'hsl(210, 15%, 97%)'; // Overall canvas background, shows for inactive cells outside textZone
+        ctx.fillStyle = 'hsl(210, 15%, 97%)'; // Overall canvas background
         ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        let currentEffectStrength = 0;
+        if (mouseEffectCenter && Date.now() - lastMouseMoveInTextZoneTime < MOUSE_EFFECT_DURATION) {
+            currentEffectStrength = 1.0 - (Date.now() - lastMouseMoveInTextZoneTime) / MOUSE_EFFECT_DURATION;
+        } else {
+            mouseEffectCenter = null; // Reset if effect has expired
+        }
 
         const hueStart = 200; // For active cells
         const hueEnd = 230;   // For active cells
@@ -253,8 +267,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Base HSL for inactive text zone cells
         const baseHueTextZone = 210;
         const baseSaturationTextZone = 93.70;
-        const baseLightnessTextZone = 87.60;
-        const lightnessNoiseRange = 4; // Total range for lightness noise
+        const baseLightnessTextZone = 85.60;
+        const lightnessNoiseRange = 10; // Total range for lightness noise
         const hueNoiseRange = 20; // Total range for hue noise
 
         for (let y = 0; y < gridHeight; y++) {
@@ -278,16 +292,33 @@ document.addEventListener('DOMContentLoaded', () => {
                         x >= textZone.x1 && x < textZone.x2 &&
                         y >= textZone.y1 && y < textZone.y2) {
                         
-                        // Perlin noise for hue and lightness
+                        // Calculate base Perlin noise (no mouse-induced time shift for sampling)
                         const n = noise3D(x * noiseScale, y * noiseScale, time * timeNoiseScale);
-                        // n is in [-1, 1], map it to [0, 1]
-                        const normalizedNoise = (n + 1) / 2;
+                        const normalizedNoise = (n + 1) / 2; // n is in [-1, 1], map it to [0, 1]
 
-                        const lightnessVariation = (normalizedNoise - 0.5) * lightnessNoiseRange;
-                        const noisyLightness = Math.max(0, Math.min(100, baseLightnessTextZone + lightnessVariation));
-                        
+                        // Base hue from Perlin noise
                         const hueVariation = (normalizedNoise - 0.5) * hueNoiseRange;
                         const noisyHue = Math.max(0, Math.min(360, baseHueTextZone + hueVariation));
+
+                        // Base lightness from Perlin noise
+                        const lightnessVariation = (normalizedNoise - 0.5) * lightnessNoiseRange;
+                        let noisyLightness = Math.max(0, Math.min(100, baseLightnessTextZone + lightnessVariation));
+
+                        // Apply direct mouse effect to lightness
+                        if (mouseEffectCenter && currentEffectStrength > 0) {
+                            const dx = x - mouseEffectCenter.x;
+                            const dy = y - mouseEffectCenter.y;
+                            const distSq = dx * dx + dy * dy;
+
+                            if (distSq < MOUSE_EFFECT_RADIUS * MOUSE_EFFECT_RADIUS) {
+                                const dist = Math.sqrt(distSq);
+                                // Stronger effect closer to center, fades with distance and time
+                                const interactionFactor = (1.0 - dist / MOUSE_EFFECT_RADIUS) * currentEffectStrength;
+                                const lightnessShift = interactionFactor * MOUSE_EFFECT_SHIFT_MAGNITUDE;
+                                noisyLightness += lightnessShift;
+                                noisyLightness = Math.max(0, Math.min(100, noisyLightness)); // Clamp lightness
+                            }
+                        }
                         
                         ctx.fillStyle = `hsl(${noisyHue}, ${baseSaturationTextZone}%, ${noisyLightness}%)`;
                         ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
@@ -306,6 +337,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const gridX = Math.floor(mouseX / CELL_SIZE);
         const gridY = Math.floor(mouseY / CELL_SIZE);
 
+        // Update for text zone background effect
+        if (textZone && textZone.x1 !== undefined &&
+            gridX >= textZone.x1 && gridX < textZone.x2 &&
+            gridY >= textZone.y1 && gridY < textZone.y2) {
+            mouseEffectCenter = { x: gridX, y: gridY };
+            lastMouseMoveInTextZoneTime = Date.now();
+        }
+
+        // Original interaction: Kill cells in radius (affects automata layer)
         for (let i = -INTERACTION_RADIUS; i <= INTERACTION_RADIUS; i++) {
             for (let j = -INTERACTION_RADIUS; j <= INTERACTION_RADIUS; j++) {
                 if (i*i + j*j > INTERACTION_RADIUS * INTERACTION_RADIUS) continue; // Circular area

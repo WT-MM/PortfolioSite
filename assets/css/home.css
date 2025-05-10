@@ -34,7 +34,7 @@
 .text {
   position: absolute;
   opacity: 0.9;
-  background-color: var(--secondaryColor);
+  background-color: transparent;
   z-index: 1;
   width: 40vw;
   height: 30vh;
@@ -45,6 +45,7 @@
   will-change: transform;
   backface-visibility: hidden;
   transform: translateZ(0);
+  pointer-events: none;
 }
 
 .text h1, .text p {

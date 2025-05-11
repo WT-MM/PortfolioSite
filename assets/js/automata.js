@@ -1,4 +1,4 @@
-import { createNoise3D } from 'https://cdn.jsdelivr.net/npm/simplex-noise@4.0.1/+esm';
+import { createNoise3D, createNoise2D } from 'https://cdn.jsdelivr.net/npm/simplex-noise@4.0.1/+esm';
 
 document.addEventListener('DOMContentLoaded', () => {
     const textElement = document.querySelector('.text-preload');
@@ -76,9 +76,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let time = 0; // Time variable for animated Perlin noise
 
     // Initialize Perlin noise
-    const noise3D = createNoise3D();
-    const noiseScale = 0.3; // feature size of Perlin noise
-    const timeNoiseScale = 0.01; // speed of noise animation
+    const backgroundNoise = createNoise3D(); // For the content of the text background
+    const edgeNoise = createNoise3D();       // For animating ragged edges
+    const noiseScale = 0.3; // feature size of Perlin noise for background
+    const timeNoiseScale = 0.01; // speed of noise animation for background
 
     // Mouse interaction for text zone background
     let mouseEffectCenter = null;
@@ -86,6 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const MOUSE_EFFECT_DURATION = 1000; // ms - How long the effect lasts after mouse stops
     const MOUSE_EFFECT_RADIUS = 6;   // grid cells - How far the effect spreads
     const MOUSE_EFFECT_SHIFT_MAGNITUDE = 7; // How much to shift noise time
+
+    // Ragged edge parameters for text death zone
+    const RAGGED_EDGE_PADDING = 10;        // How many cells around original textZone to check
+    const RAGGED_EDGE_NOISE_SCALE = 0.2;  // Scale of noise for edge perturbation
+    const RAGGED_EDGE_NOISE_MAGNITUDE = 2; // Max cell displacement for edge
+    const RAGGED_EDGE_TIME_NOISE_SCALE = 0.01; // Speed of edge animation
 
     function updateActiveLeniaParams() {
         const preset = KERNEL_PRESETS[SELECTED_KERNEL_TYPE];
@@ -236,12 +243,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         [grid, nextGrid] = [nextGrid, grid];
 
+        // Clear cells in the text zone with animated ragged edges
         if (textZone.x2 > textZone.x1 && textZone.y2 > textZone.y1) {
-            for (let y = textZone.y1; y < textZone.y2; y++) {
-                for (let x = textZone.x1; x < textZone.x2; x++) {
-                    if (x >= 0 && x < gridWidth && y >= 0 && y < gridHeight) {
+            const startX = Math.max(0, textZone.x1 - RAGGED_EDGE_PADDING);
+            const endX = Math.min(gridWidth, textZone.x2 + RAGGED_EDGE_PADDING);
+            const startY = Math.max(0, textZone.y1 - RAGGED_EDGE_PADDING);
+            const endY = Math.min(gridHeight, textZone.y2 + RAGGED_EDGE_PADDING);
+
+            for (let yCell = startY; yCell < endY; yCell++) {
+                for (let xCell = startX; xCell < endX; xCell++) {
+                    const t = time * RAGGED_EDGE_TIME_NOISE_SCALE;
+                    // Perturb each edge independently using animated noise
+                    const noiseX1 = edgeNoise(xCell * RAGGED_EDGE_NOISE_SCALE, yCell * RAGGED_EDGE_NOISE_SCALE + 10, t) * RAGGED_EDGE_NOISE_MAGNITUDE;
+                    const noiseX2 = edgeNoise(xCell * RAGGED_EDGE_NOISE_SCALE, yCell * RAGGED_EDGE_NOISE_SCALE + 20, t) * RAGGED_EDGE_NOISE_MAGNITUDE;
+                    const noiseY1 = edgeNoise(xCell * RAGGED_EDGE_NOISE_SCALE + 30, yCell * RAGGED_EDGE_NOISE_SCALE, t) * RAGGED_EDGE_NOISE_MAGNITUDE;
+                    const noiseY2 = edgeNoise(xCell * RAGGED_EDGE_NOISE_SCALE + 40, yCell * RAGGED_EDGE_NOISE_SCALE, t) * RAGGED_EDGE_NOISE_MAGNITUDE;
+
+                    const perturbedX1 = textZone.x1 + noiseX1;
+                    const perturbedX2 = textZone.x2 + noiseX2;
+                    const perturbedY1 = textZone.y1 + noiseY1;
+                    const perturbedY2 = textZone.y2 + noiseY2;
+
+                    // Check if the cell is within the perturbed, ragged rectangle
+                    if (xCell >= perturbedX1 && xCell < perturbedX2 &&
+                        yCell >= perturbedY1 && yCell < perturbedY2) {
                         if (Math.random() > currentTextZoneSurvivalChance) { 
-                            grid[y][x] = 0;
+                            grid[yCell][xCell] = 0;
                         }
                     }
                 }
@@ -261,69 +288,79 @@ document.addEventListener('DOMContentLoaded', () => {
             mouseEffectCenter = null; // Reset if effect has expired
         }
 
-        const hueStart = 200; // For active cells
-        const hueEnd = 230;   // For active cells
+        const hueStart = 200; // For active cells (Lenia patterns)
+        const hueEnd = 230;   // For active cells (Lenia patterns)
 
-        // Base HSL for inactive text zone cells
+        // Base HSL for inactive text zone cells (the light gray Perlin noise background)
         const baseHueTextZone = 210;
-        const baseSaturationTextZone = 93.70;
-        const baseLightnessTextZone = 85.60;
-        const lightnessNoiseRange = 10; // Total range for lightness noise
-        const hueNoiseRange = 20; // Total range for hue noise
+        const baseSaturationTextZone = 10;
+        const baseLightnessTextZone = 94;
+        const lightnessNoiseRange = 10; 
+        const hueNoiseRange = 20; 
+        // const baseHueTextZone = 210;
+        // const baseSaturationTextZone = 93.70;
+        // const baseLightnessTextZone = 85.60;
+        // const lightnessNoiseRange = 10; // Total range for lightness noise
+        // const hueNoiseRange = 20; // Total range for hue noise
 
         for (let y = 0; y < gridHeight; y++) {
             for (let x = 0; x < gridWidth; x++) {
-                const value = grid[y][x]; // Value from 0 to 1
-                if (value > 0.01) { // Active cell
-                    // Interpolate hue based on value for subtle shifts
-                    const hue = hueStart + (hueEnd - hueStart) * value;
+                const value = grid[y][x]; // Value from 0 to 1 (Lenia cell state)
 
-                    // Saturation: increases with value, but stays desaturated
-                    const saturation = 5 + Math.floor(value * 30); // 5% to 35%
+                // Check if current cell (x,y) is within the ANIMATED RAGGED text zone boundary
+                let isInsideRaggedZone = false;
+                if (textZone.x2 > textZone.x1 && textZone.y2 > textZone.y1) { // only if textZone is valid
+                    const tEdge = time * RAGGED_EDGE_TIME_NOISE_SCALE;
+                    const noiseX1 = edgeNoise(x * RAGGED_EDGE_NOISE_SCALE, y * RAGGED_EDGE_NOISE_SCALE + 10, tEdge) * RAGGED_EDGE_NOISE_MAGNITUDE;
+                    const noiseX2 = edgeNoise(x * RAGGED_EDGE_NOISE_SCALE, y * RAGGED_EDGE_NOISE_SCALE + 20, tEdge) * RAGGED_EDGE_NOISE_MAGNITUDE;
+                    const noiseY1 = edgeNoise(x * RAGGED_EDGE_NOISE_SCALE + 30, y * RAGGED_EDGE_NOISE_SCALE, tEdge) * RAGGED_EDGE_NOISE_MAGNITUDE;
+                    const noiseY2 = edgeNoise(x * RAGGED_EDGE_NOISE_SCALE + 40, y * RAGGED_EDGE_NOISE_SCALE, tEdge) * RAGGED_EDGE_NOISE_MAGNITUDE;
 
-                    // Lightness: decreases with value to make active cells more prominent (but still light)
-                    const lightness = 90 - Math.floor(value * 20);
-
-                    ctx.fillStyle = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-                    ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-                } else { // Inactive cell
-                    // Check if this inactive cell is within the textZone
-                    if (textZone && textZone.x1 !== undefined && // Ensure textZone is initialized
-                        x >= textZone.x1 && x < textZone.x2 &&
-                        y >= textZone.y1 && y < textZone.y2) {
-                        
-                        // Calculate base Perlin noise (no mouse-induced time shift for sampling)
-                        const n = noise3D(x * noiseScale, y * noiseScale, time * timeNoiseScale);
-                        const normalizedNoise = (n + 1) / 2; // n is in [-1, 1], map it to [0, 1]
-
-                        // Base hue from Perlin noise
-                        const hueVariation = (normalizedNoise - 0.5) * hueNoiseRange;
-                        const noisyHue = Math.max(0, Math.min(360, baseHueTextZone + hueVariation));
-
-                        // Base lightness from Perlin noise
-                        const lightnessVariation = (normalizedNoise - 0.5) * lightnessNoiseRange;
-                        let noisyLightness = Math.max(0, Math.min(100, baseLightnessTextZone + lightnessVariation));
-
-                        // Apply direct mouse effect to lightness
-                        if (mouseEffectCenter && currentEffectStrength > 0) {
-                            const dx = x - mouseEffectCenter.x;
-                            const dy = y - mouseEffectCenter.y;
-                            const distSq = dx * dx + dy * dy;
-
-                            if (distSq < MOUSE_EFFECT_RADIUS * MOUSE_EFFECT_RADIUS) {
-                                const dist = Math.sqrt(distSq);
-                                // Stronger effect closer to center, fades with distance and time
-                                const interactionFactor = (1.0 - dist / MOUSE_EFFECT_RADIUS) * currentEffectStrength;
-                                const lightnessShift = interactionFactor * MOUSE_EFFECT_SHIFT_MAGNITUDE;
-                                noisyLightness += lightnessShift;
-                                noisyLightness = Math.max(0, Math.min(100, noisyLightness)); // Clamp lightness
-                            }
-                        }
-                        
-                        ctx.fillStyle = `hsl(${noisyHue}, ${baseSaturationTextZone}%, ${noisyLightness}%)`;
-                        ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                    const perturbedX1 = textZone.x1 + noiseX1;
+                    const perturbedX2 = textZone.x2 + noiseX2;
+                    const perturbedY1 = textZone.y1 + noiseY1;
+                    const perturbedY2 = textZone.y2 + noiseY2;
+                    if (x >= perturbedX1 && x < perturbedX2 && y >= perturbedY1 && y < perturbedY2) {
+                        isInsideRaggedZone = true;
                     }
                 }
+
+                if (value > 0.01) { // Active Lenia cell
+                    const hue = hueStart + (hueEnd - hueStart) * value;
+                    const saturation = 5 + Math.floor(value * 30);
+                    const lightness = 90 - Math.floor(value * 20);
+                    ctx.fillStyle = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+                    ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                } else if (isInsideRaggedZone) { // Inactive cell INSIDE the animated ragged text zone
+                    // Calculate base Perlin noise for the background pattern
+                    const n = backgroundNoise(x * noiseScale, y * noiseScale, time * timeNoiseScale);
+                    const normalizedNoise = (n + 1) / 2; 
+
+                    const hueVariation = (normalizedNoise - 0.5) * hueNoiseRange;
+                    const noisyHue = Math.max(0, Math.min(360, baseHueTextZone + hueVariation));
+
+                    const lightnessVariation = (normalizedNoise - 0.5) * lightnessNoiseRange;
+                    let noisyLightness = Math.max(0, Math.min(100, baseLightnessTextZone + lightnessVariation));
+
+                    // Apply direct mouse effect to lightness
+                    if (mouseEffectCenter && currentEffectStrength > 0) {
+                        const dxMouse = x - mouseEffectCenter.x;
+                        const dyMouse = y - mouseEffectCenter.y;
+                        const distSqMouse = dxMouse * dxMouse + dyMouse * dyMouse;
+
+                        if (distSqMouse < MOUSE_EFFECT_RADIUS * MOUSE_EFFECT_RADIUS) {
+                            const distMouse = Math.sqrt(distSqMouse);
+                            const interactionFactor = (1.0 - distMouse / MOUSE_EFFECT_RADIUS) * currentEffectStrength;
+                            const lightnessShift = interactionFactor * MOUSE_EFFECT_SHIFT_MAGNITUDE;
+                            noisyLightness += lightnessShift;
+                            noisyLightness = Math.max(0, Math.min(100, noisyLightness));
+                        }
+                    }
+                    
+                    ctx.fillStyle = `hsl(${noisyHue}, ${baseSaturationTextZone}%, ${noisyLightness}%)`;
+                    ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                }
+                // Implicit else: Inactive cells OUTSIDE ragged zone show the global canvas background
             }
         }
     }

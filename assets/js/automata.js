@@ -181,12 +181,38 @@ document.addEventListener('DOMContentLoaded', () => {
     function initializeGrid() {
         grid = Array(gridHeight).fill(null).map(() => Array(gridWidth).fill(0));
         nextGrid = Array(gridHeight).fill(null).map(() => Array(gridWidth).fill(0));
-        for (let y = 0; y < gridHeight; y++) {
-            for (let x = 0; x < gridWidth; x++) {
-                grid[y][x] = Math.random(); // Random initial state (0 to 1)
+        
+        const tEdgeInit = time * RAGGED_EDGE_TIME_NOISE_SCALE; // Use current time for initial raggedness
+
+        for (let yCell = 0; yCell < gridHeight; yCell++) {
+            for (let xCell = 0; xCell < gridWidth; xCell++) {
+                let isInsideInitialRaggedZone = false;
+                if (textZone.x2 > textZone.x1 && textZone.y2 > textZone.y1) { // Check if textZone is valid
+                    // Calculate perturbed edges for this cell at current time
+                    const noiseX1 = edgeNoise(xCell * RAGGED_EDGE_NOISE_SCALE, yCell * RAGGED_EDGE_NOISE_SCALE + 10, tEdgeInit) * RAGGED_EDGE_NOISE_MAGNITUDE;
+                    const noiseX2 = edgeNoise(xCell * RAGGED_EDGE_NOISE_SCALE, yCell * RAGGED_EDGE_NOISE_SCALE + 20, tEdgeInit) * RAGGED_EDGE_NOISE_MAGNITUDE;
+                    const noiseY1 = edgeNoise(xCell * RAGGED_EDGE_NOISE_SCALE + 30, yCell * RAGGED_EDGE_NOISE_SCALE, tEdgeInit) * RAGGED_EDGE_NOISE_MAGNITUDE;
+                    const noiseY2 = edgeNoise(xCell * RAGGED_EDGE_NOISE_SCALE + 40, yCell * RAGGED_EDGE_NOISE_SCALE, tEdgeInit) * RAGGED_EDGE_NOISE_MAGNITUDE;
+
+                    const perturbedX1 = textZone.x1 + noiseX1;
+                    const perturbedX2 = textZone.x2 + noiseX2;
+                    const perturbedY1 = textZone.y1 + noiseY1;
+                    const perturbedY2 = textZone.y2 + noiseY2;
+
+                    if (xCell >= perturbedX1 && xCell < perturbedX2 &&
+                        yCell >= perturbedY1 && yCell < perturbedY2) {
+                        isInsideInitialRaggedZone = true;
+                    }
+                }
+
+                if (isInsideInitialRaggedZone) {
+                    grid[yCell][xCell] = 0; // Initialize as cleared if inside ragged zone
+                } else {
+                    grid[yCell][xCell] = Math.random(); // Random initial state otherwise
+                }
             }
         }
-        updateTextDeathZone(); // Initial calculation
+        updateTextDeathZone(); // Initial calculation of the rectangular textZone
     }
 
     function resizeCanvas() {

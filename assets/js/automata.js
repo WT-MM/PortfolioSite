@@ -333,31 +333,13 @@ document.addEventListener('DOMContentLoaded', () => {
             for (let x = 0; x < gridWidth; x++) {
                 const value = grid[y][x]; // Value from 0 to 1 (Lenia cell state)
 
-                // Check if current cell (x,y) is within the ANIMATED RAGGED text zone boundary
-                let isInsideRaggedZone = false;
-                if (textZone.x2 > textZone.x1 && textZone.y2 > textZone.y1) { // only if textZone is valid
-                    const tEdge = time * RAGGED_EDGE_TIME_NOISE_SCALE;
-                    const noiseX1 = edgeNoise(x * RAGGED_EDGE_NOISE_SCALE, y * RAGGED_EDGE_NOISE_SCALE + 10, tEdge) * RAGGED_EDGE_NOISE_MAGNITUDE;
-                    const noiseX2 = edgeNoise(x * RAGGED_EDGE_NOISE_SCALE, y * RAGGED_EDGE_NOISE_SCALE + 20, tEdge) * RAGGED_EDGE_NOISE_MAGNITUDE;
-                    const noiseY1 = edgeNoise(x * RAGGED_EDGE_NOISE_SCALE + 30, y * RAGGED_EDGE_NOISE_SCALE, tEdge) * RAGGED_EDGE_NOISE_MAGNITUDE;
-                    const noiseY2 = edgeNoise(x * RAGGED_EDGE_NOISE_SCALE + 40, y * RAGGED_EDGE_NOISE_SCALE, tEdge) * RAGGED_EDGE_NOISE_MAGNITUDE;
-
-                    const perturbedX1 = textZone.x1 + noiseX1;
-                    const perturbedX2 = textZone.x2 + noiseX2;
-                    const perturbedY1 = textZone.y1 + noiseY1;
-                    const perturbedY2 = textZone.y2 + noiseY2;
-                    if (x >= perturbedX1 && x < perturbedX2 && y >= perturbedY1 && y < perturbedY2) {
-                        isInsideRaggedZone = true;
-                    }
-                }
-
-                if (value > 0.01) { // Active Lenia cell
+                if (value > 0.01) { // Active Lenia cell - draw on top
                     const hue = hueStart + (hueEnd - hueStart) * value;
                     const saturation = 5 + Math.floor(value * 30);
                     const lightness = 90 - Math.floor(value * 20);
                     ctx.fillStyle = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
                     ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-                } else if (isInsideRaggedZone) { // Inactive cell INSIDE the animated ragged text zone
+                } else { // Inactive cell - apply Perlin noise background everywhere
                     // Calculate base Perlin noise for the background pattern
                     const n = backgroundNoise(x * noiseScale, y * noiseScale, time * timeNoiseScale);
                     const normalizedNoise = (n + 1) / 2; 
@@ -368,8 +350,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     const lightnessVariation = (normalizedNoise - 0.5) * lightnessNoiseRange;
                     let noisyLightness = Math.max(0, Math.min(100, baseLightnessTextZone + lightnessVariation));
 
-                    // Apply direct mouse effect to lightness
-                    if (mouseEffectCenter && currentEffectStrength > 0) {
+                    // Check if current cell (x,y) is within the ANIMATED RAGGED text zone boundary
+                    // to apply mouse effect only there.
+                    let isInsideRaggedZoneForMouseEffect = false;
+                    if (textZone.x2 > textZone.x1 && textZone.y2 > textZone.y1) { 
+                        const tEdge = time * RAGGED_EDGE_TIME_NOISE_SCALE;
+                        const noiseX1 = edgeNoise(x * RAGGED_EDGE_NOISE_SCALE, y * RAGGED_EDGE_NOISE_SCALE + 10, tEdge) * RAGGED_EDGE_NOISE_MAGNITUDE;
+                        const noiseX2 = edgeNoise(x * RAGGED_EDGE_NOISE_SCALE, y * RAGGED_EDGE_NOISE_SCALE + 20, tEdge) * RAGGED_EDGE_NOISE_MAGNITUDE;
+                        const noiseY1 = edgeNoise(x * RAGGED_EDGE_NOISE_SCALE + 30, y * RAGGED_EDGE_NOISE_SCALE, tEdge) * RAGGED_EDGE_NOISE_MAGNITUDE;
+                        const noiseY2 = edgeNoise(x * RAGGED_EDGE_NOISE_SCALE + 40, y * RAGGED_EDGE_NOISE_SCALE, tEdge) * RAGGED_EDGE_NOISE_MAGNITUDE;
+
+                        const perturbedX1 = textZone.x1 + noiseX1;
+                        const perturbedX2 = textZone.x2 + noiseX2;
+                        const perturbedY1 = textZone.y1 + noiseY1;
+                        const perturbedY2 = textZone.y2 + noiseY2;
+                        if (x >= perturbedX1 && x < perturbedX2 && y >= perturbedY1 && y < perturbedY2) {
+                            isInsideRaggedZoneForMouseEffect = true;
+                        }
+                    }
+
+                    // Apply direct mouse effect to lightness if inside the ragged zone
+                    if (isInsideRaggedZoneForMouseEffect && mouseEffectCenter && currentEffectStrength > 0) {
                         const dxMouse = x - mouseEffectCenter.x;
                         const dyMouse = y - mouseEffectCenter.y;
                         const distSqMouse = dxMouse * dxMouse + dyMouse * dyMouse;
@@ -386,7 +387,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.fillStyle = `hsl(${noisyHue}, ${baseSaturationTextZone}%, ${noisyLightness}%)`;
                     ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                 }
-                // Implicit else: Inactive cells OUTSIDE ragged zone show the global canvas background
             }
         }
     }

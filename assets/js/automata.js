@@ -218,15 +218,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function resizeCanvas() {
         canvas.width = canvas.offsetWidth;
         canvas.height = canvas.offsetHeight;
-        gridWidth = Math.floor(canvas.width / CELL_SIZE);
-        gridHeight = Math.floor(canvas.height / CELL_SIZE);
+        gridWidth = Math.ceil(canvas.width / CELL_SIZE);
+        gridHeight = Math.ceil(canvas.height / CELL_SIZE);
         console.log(`Canvas resized: ${canvas.width}x${canvas.height}, Grid: ${gridWidth}x${gridHeight}`);
         
         if (gridWidth > 0 && gridHeight > 0) {
-            updateActiveLeniaParams(); // Load M, S, DT for the selected kernel type
+            updateActiveLeniaParams(); 
             createKernel();         
-            initializeGrid();       
-            updateTextDeathZone(); 
+            updateTextDeathZone(); // Update text death zone before initializing grid to avoid seeding in the text zone
+            initializeGrid();
         } else {
             grid = []; nextGrid =[];
         }

@@ -31,27 +31,71 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentTextZoneSurvivalChance;
 
     const KERNEL_PRESETS = {
-        "gaussian_soft": { // stripy
-            M: 0.25,  // Mean of the growth function's peak (center of the fertile potential range for cell growth)
-            S: 0.035, // Standard deviation of the growth function's peak (width of the fertile range)
-            DT: 0.01, // Time step for simulation (how much a cell's value changes per update based on growth)
-            KERNEL_RADIUS: 3, // Radius of the convolution kernel (neighborhood size; kernel matrix is (2*R+1)x(2*R+1))
-            TEXT_ZONE_SURVIVAL_CHANCE: 0.97 // Chance (0-1) for cells in the text overlay area to survive clearing each step
+        "single_ring": { // Maze
+            M: 0.39,
+            S: 0.08,
+            DT: 0.05,
+            KERNEL_RADIUS: 3,
+            TEXT_ZONE_SURVIVAL_CHANCE: 0.3,
+            kernelParams: {
+                rings: [
+                    { radius: 0.5, width: 0.15, height: 1.0, sensitivity: 1, shape: "gaussian" }
+                ]
+            }
         },
-        "gaussian_sharp": { // brick wall
-            M: 0.1,   // Mean for growth peak
-            S: 0.01,  // Std. dev. for growth peak (sharper peak)
-            DT: 0.015,// Time step
-            KERNEL_RADIUS: 10, // Kernel radius
-            TEXT_ZONE_SURVIVAL_CHANCE: 0.90 // Text zone survival chance
+        "triplebump": { // Organic wire
+            M: 0.3,
+            S: 0.032,
+            DT: 0.05,
+            KERNEL_RADIUS: 5,
+            TEXT_ZONE_SURVIVAL_CHANCE: 0.8,
+            kernelParams: {
+                rings: [
+                    { radius: 0.3, width: 0.3, height: 0.1, sensitivity: 1, shape: "gaussian" },
+                    { radius: 0.6, width: 0.2, height: 0.4, sensitivity: 1, shape: "exponential" },
+                    { radius: 0.85, width: 0.6, height: 0.8, sensitivity: 1, shape: "gaussian" }
+                ]
+            }
         },
-        "sombrero": { // organic
-            M: 0.1,   // Mean for growth peak
-            S: 0.25,  // Std. dev. for growth peak (wider peak for sombrero often works well)
-            DT: 0.01, // Time step
-            KERNEL_RADIUS: 3, // Kernel radius
-            TEXT_ZONE_SURVIVAL_CHANCE: 0.4 // Text zone survival chance
-        }
+        "central_peak": { // little guys
+            M: 0.25,
+            S: 0.03,
+            DT: 0.04,
+            KERNEL_RADIUS: 8,
+            TEXT_ZONE_SURVIVAL_CHANCE: 0.4,
+            kernelParams: {
+                rings: [
+                    { radius: 0.0, width: 0.1, height: 3.0, sensitivity: 2, shape: "gaussian" },
+                    { radius: 0.7, width: 0.15, height: 0.5, sensitivity: 1, shape: "gaussian" }
+                ]
+            }
+        },
+        "triple_peak": { // blocky
+            M: 0.25,
+            S: 0.045 ,
+            DT: 0.01,
+            KERNEL_RADIUS: 3,
+            TEXT_ZONE_SURVIVAL_CHANCE: 0.4,
+            kernelParams: {
+                rings: [
+                    { radius: 0.0, width: 0.05, height: 1.5, sensitivity: -0.5, shape: "exponential" },
+                ]
+            }
+        },
+        "mixed_shapes": {
+            M: 0.3,
+            S: 0.08,
+            DT: 0.03,
+            KERNEL_RADIUS: 5,
+            TEXT_ZONE_SURVIVAL_CHANCE: 0.9,
+            kernelParams: {
+                rings: [
+                    { radius: 0.0, width: 0.1, height: 0.8, sensitivity: 1, shape: "gaussian" },
+                    { radius: 0.4, width: 0.12, height: 1.2, sensitivity: 1, shape: "exponential" },
+                    { radius: 0.7, width: 0.08, height: 0.4, sensitivity: 1, shape: "gaussian" }
+                ]
+            }
+        },
     };
 
     const INTERACTION_RADIUS = 3;
@@ -118,25 +162,24 @@ document.addEventListener('DOMContentLoaded', () => {
         kernel = Array(size).fill(null).map(() => Array(size).fill(0));
         let sum = 0;
 
-        console.log(`Creating kernel: ${SELECTED_KERNEL_TYPE} with K_RADIUS: ${K_RADIUS}`);
+        const { rings } = preset.kernelParams;
 
         for (let i = -K_RADIUS; i <= K_RADIUS; i++) {
             for (let j = -K_RADIUS; j <= K_RADIUS; j++) {
-                const distSq = i * i + j * j;
+                const r = Math.sqrt(i * i + j * j) / K_RADIUS;
                 let val = 0;
-
-                if (SELECTED_KERNEL_TYPE === "gaussian_soft") {
-                    const sigma = K_RADIUS / 2;
-                    val = Math.exp(-distSq / (2 * sigma * sigma));
-                } else if (SELECTED_KERNEL_TYPE === "gaussian_sharp") {
-                    const sigma = K_RADIUS / 4;
-                    val = Math.exp(-distSq / (2 * sigma * sigma));
-                } else if (SELECTED_KERNEL_TYPE === "sombrero") {
-                    const sigma1 = K_RADIUS / 3;
-                    const sigma2 = K_RADIUS * 0.8;
-                    const val1 = Math.exp(-distSq / (2 * sigma1 * sigma1));
-                    const val2 = Math.exp(-distSq / (2 * sigma2 * sigma2));
-                    val = val1 - 0.7 * val2;
+                
+                for (const ring of rings) {
+                    const { radius, width, height, sensitivity, shape } = ring;
+                    const rFromRing = Math.abs(r - radius);
+                    
+                    if (shape === "gaussian") {
+                        // Gaussian bell function centered at ring radius
+                        val += height * Math.exp(-(rFromRing * rFromRing * sensitivity) / (2 * width * width));
+                    } else if (shape === "exponential") {
+                        // Exponential bell function centered at ring radius
+                        val += height * Math.exp(-rFromRing * sensitivity / width);
+                    }
                 }
                 
                 kernel[i + K_RADIUS][j + K_RADIUS] = val;
@@ -144,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // Normalize kernel
         if (sum !== 0) {
             for (let i = 0; i < size; i++) {
                 for (let j = 0; j < size; j++) {
@@ -152,8 +196,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } else {
             if (kernel[K_RADIUS] && kernel[K_RADIUS][K_RADIUS] !== undefined) {
-                 kernel[K_RADIUS][K_RADIUS] = 1;
-                 console.warn("Kernel sum was 0, fallback to center = 1. Check kernel parameters.");
+                kernel[K_RADIUS][K_RADIUS] = 1;
+                console.warn("Kernel sum was 0, fallback to center = 1. Check kernel parameters.");
             }
         }
     }

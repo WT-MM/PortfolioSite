@@ -34,7 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "single_ring": { // Maze
             M: 0.39,
             S: 0.08,
-            DT: 0.05,
+            // DT: 0.05,
+            DT: 0.1,
             KERNEL_RADIUS: 3,
             TEXT_ZONE_SURVIVAL_CHANCE: 0.3,
             kernelParams: {
@@ -46,7 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "triplebump": { // Organic wire
             M: 0.3,
             S: 0.032,
-            DT: 0.05,
+            // DT: 0.05,
+            DT: 0.1,
             KERNEL_RADIUS: 5,
             TEXT_ZONE_SURVIVAL_CHANCE: 0.8,
             kernelParams: {
@@ -60,7 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "central_peak": { // little guys
             M: 0.25,
             S: 0.03,
-            DT: 0.04,
+            // DT: 0.04,
+            DT: 0.08,
             KERNEL_RADIUS: 8,
             TEXT_ZONE_SURVIVAL_CHANCE: 0.4,
             kernelParams: {
@@ -72,8 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         "triple_peak": { // blocky
             M: 0.25,
-            S: 0.045 ,
-            DT: 0.01,
+            S: 0.045,
+            // DT: 0.01,
+            DT: 0.02,
             KERNEL_RADIUS: 3,
             TEXT_ZONE_SURVIVAL_CHANCE: 0.4,
             kernelParams: {
@@ -85,7 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "mixed_shapes": {
             M: 0.3,
             S: 0.08,
-            DT: 0.03,
+            // DT: 0.03,
+            DT: 0.06,
             KERNEL_RADIUS: 5,
             TEXT_ZONE_SURVIVAL_CHANCE: 0.9,
             kernelParams: {
@@ -469,7 +474,7 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.addEventListener('mousemove', handleMouseMove);
 
     let lastUpdateTime = 0;
-    const updateInterval = 1; // ms, faster updates for smoother Lenia-like feel
+    const updateInterval = 2; // ms, faster updates for smoother feel
 
     function startWindEvent() {
         const direction = WIND_DIRECTIONS[Math.floor(Math.random() * WIND_DIRECTIONS.length)];
@@ -505,6 +510,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             time++; // Increment time for Perlin noise animation
             drawGrid();
+            
         }
         requestAnimationFrame(animationLoop);
     }

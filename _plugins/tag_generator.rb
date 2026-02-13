@@ -4,6 +4,7 @@ module Jekyll
 
     def generate(site)
       site.tags.each do |tag, posts|
+        next if tag == 'draft'
         site.pages << TagPage.new(site, site.source, tag, posts)
       end
     end

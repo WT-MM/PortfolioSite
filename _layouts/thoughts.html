@@ -2,27 +2,44 @@
 layout: default
 ---
 <div class="jumbotron" id="title">
-    <h1 class='text-center'>Thoughts</h1>
+    <h1 class='text-center'>{{ page.title | default: "Thoughts" }}</h1>
 </div>
 
 <link rel="stylesheet" href="/assets/css/thoughts.css">
 <div class="thoughts-container">
+    {% assign published_count = 0 %}
+    {% for post in site.posts %}
+        {% unless post.tags contains "draft" %}
+            {% assign published_count = published_count | plus: 1 %}
+        {% endunless %}
+    {% endfor %}
+
     <!-- Sidebar -->
     <aside class="sidebar">
         <h3>Tags</h3>
         <ul class="tag-list">
             <li>
                 <a href="/thoughts/" class="{% if page.url == '/thoughts/' %}active{% endif %}">
-                    All ({{ site.posts.size }})
+                    All ({{ published_count }})
                 </a>
             </li>
             {% assign tags = site.tags | sort %}
             {% for tag in tags %}
+                {% unless tag[0] == "draft" %}
+                    {% assign tag_count = 0 %}
+                    {% for post in tag[1] %}
+                        {% unless post.tags contains "draft" %}
+                            {% assign tag_count = tag_count | plus: 1 %}
+                        {% endunless %}
+                    {% endfor %}
+                    {% if tag_count > 0 %}
                 <li>
                     <a href="/thoughts/tags/{{ tag[0] }}/" class="{% if page.tag == tag[0] %}active{% endif %}">
-                        {{ tag[0] }} ({{ tag[1].size }})
+                        {{ tag[0] }} ({{ tag_count }})
                     </a>
                 </li>
+                    {% endif %}
+                {% endunless %}
             {% endfor %}
         </ul>
     </aside>

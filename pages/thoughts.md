@@ -6,6 +6,7 @@ permalink: /thoughts/
 
 <ul class="post-list">
     {% for post in site.posts %}
+        {% unless post.tags contains "draft" %}
         <li class="post-item">
             <a href="{{ post.url }}" class="post-link">
                 <time class="post-date" datetime="{{ post.date | date_to_xmlschema }}">
@@ -26,5 +27,6 @@ permalink: /thoughts/
                 {% endif %}
             </a>
         </li>
+        {% endunless %}
     {% endfor %}
 </ul>

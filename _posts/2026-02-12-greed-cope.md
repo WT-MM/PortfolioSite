@@ -2,6 +2,7 @@
 layout: post
 title: "Greed / Cope"
 date: 2026-02-12
+permalink: /drafts/2026/02-12/greed-cope/
 description: "Reflections in the midst of a state of mild disassociation"
 tags: [life, draft]
 ---

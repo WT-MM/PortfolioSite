@@ -40,6 +40,8 @@ I quite literally may have met more people in this past semester than my entire 
 
 Because I'm a greedy person, I am often unsatisfied. I feel like there is always something better to strive for. By itself, I don't think this is necessarily a bad thing. However, I think that I am so used to this state of dissatisfaction that when there is something worth attaining/achieving/completing, I functionally shut down. I create new problems to solve, investigate, and otherwise waste my time on. In a way, this entire entry is one of those false works to fixate on that I create solely to avoid something worthwhile.
 
+Concretely, I yearn to find meaning yet, in some sense, fear what I imagine must be involved in finding it. To make it clear, I don't fear risk or uncertainty or failure. I fear a commitment to something that I will deeply regret. Perhaps they are the same thing. 
+
 **Because I'm so often busy yet "running in place,"** I feel that I'm placing a lot of stress on myself. 
 
 *Because I''m mildly socially autistic*, I think that my disassociations are caused by stressful social interaction. In a very camel-back-breaking way, even minimally difficult social interactions cascade on top of general stress.

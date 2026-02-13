@@ -44,7 +44,7 @@ Concretely, I yearn to find meaning yet, in some sense, fear what I imagine must
 
 **Because I'm so often busy yet "running in place,"** I feel that I'm placing a lot of stress on myself. 
 
-*Because I''m mildly socially autistic*, I think that my disassociations are caused by stressful social interaction. In a very camel-back-breaking way, even minimally difficult social interactions cascade on top of general stress.
+*Because I''m mildly socially autistic*, I think that my disassociations are caused by stressful social interaction. In a very camelly back-breaking way, even minimally difficult social interactions cascade on top of general stressors.
 
 Because I don't think I can ever stop being a greedy person, the only solution is to make every social experience a comfortable experience. As of now, I think there are likely two avenues: 
 * believe that nothing matters (very nihilistic)
@@ -53,3 +53,5 @@ Because I don't think I can ever stop being a greedy person, the only solution i
 I would like to believe that everything matters and thus "self-actualize," but it is significantly easier to take the nihilistic approach. 
 
 My main regret used to be that there wasn't enough energy or time in the world. I think I've come to realize that my true regret is that I'm so bad at changing my nature.
+
+I had a conversation with a friend the other day. Briefly, they asked if I feared death. It's corny and a bit too melodramatic, but I said that I didn't. I don't fear death; rather, I fear not having lived enough.

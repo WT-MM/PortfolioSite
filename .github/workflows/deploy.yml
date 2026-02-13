@@ -34,6 +34,11 @@ jobs:
         run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production
+
+      - name: Show generated draft paths
+        run: |
+          echo "Generated draft files in _site:"
+          find _site -type f | rg "/drafts/" || echo "(none)"
           
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

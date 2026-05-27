@@ -3,6 +3,8 @@ layout: default
 title: About Me
 permalink: /aboutme/
 custom_css: about.css
+preload_image: /assets/images/wesleymaa4-1600.webp
+preload_image_type: image/webp
 ---
 
 <div class="jumbotron" id="title">
@@ -12,7 +14,10 @@ custom_css: about.css
 <div class="container-fluid">
     <div id="content" class="row equal-height">
         <div class="col-sm-12 col-md-8" style="flex:1;display:flex;">
-            <img src="/assets/images/wesleymaa4.jpg" style="padding-bottom:10px;border-radius:5px;" class="img-fluid">
+            <picture>
+                <source srcset="/assets/images/wesleymaa4-1600.webp" type="image/webp">
+                <img src="/assets/images/wesleymaa4-1600.jpg" alt="Wesley Maa" width="1600" height="2400" decoding="async" style="padding-bottom:10px;border-radius:5px;" class="img-fluid">
+            </picture>
         </div>
         <div class="col-sm-12 col-md-8 text-left" id="aboutme">
             <div style="height: 0.7em;"></div>

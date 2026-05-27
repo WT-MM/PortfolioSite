@@ -7,6 +7,9 @@
     <meta name="google-site-verification" content="c0MiUIwHGLq67czpclnMlzafunnMGTcAuTvXl3N50rg" />
     <link rel="shortcut icon" type="image/png" href="/assets/images/fav.png?v=1"/>
     {% include head.html %}
+    {% if page.preload_image %}
+    <link rel="preload" as="image" href="{{ page.preload_image }}"{% if page.preload_image_type %} type="{{ page.preload_image_type }}"{% endif %}>
+    {% endif %}
     {% if page.custom_css %}
     <link rel="stylesheet" href="/assets/css/{{ page.custom_css }}">
     {% endif %}
@@ -16,8 +19,8 @@
 </head>
 <body style="background-color:#f2f2f2; height:100%;">
     {% if page.warning_message %}
-    <div id="message" class="alert alert-info alert-dismissible fade show sticky-top text-center" role="alert" style="z-index: 9999;">
-        <button type="button" class="close" onclick="closeWarning()">&times;</button>
+    <div id="message" class="alert alert-info alert-dismissible sticky-top text-center" role="alert" style="z-index:9999;transition:opacity 1s ease, max-height 0.3s ease 1s;max-height:200px;overflow:hidden;">
+        <button type="button" class="close" aria-label="Close" onclick="closeWarning()">&times;</button>
         {{ page.warning_message }}
     </div>
     {% endif %}
@@ -26,18 +29,13 @@
     {% if page.warning_message %}
     <script>
         function closeWarning() {
-            $("#message").fadeTo(1000, 0).slideUp(300, function(){
-                $(this).remove();
-            });
+            var m = document.getElementById('message');
+            if (!m) return;
+            m.style.opacity = '0';
+            m.style.maxHeight = '0';
+            setTimeout(function(){ m.remove(); }, 1300);
         }
-
-        $(document).ready(function() {
-            setTimeout(function() {
-                $("#message").fadeTo(1000, 0).slideUp(300, function(){
-                    $(this).remove();
-                });
-            }, 10000);
-        });
+        setTimeout(closeWarning, 10000);
     </script>
     {% endif %}
     {% include footer.html %}

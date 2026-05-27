@@ -17,7 +17,7 @@ warning_message: This page continues to be a work-in-progress
       <div class="card h-100" onclick="window.location='{{ project.url }}'">
         {% if project.thumbnail %}
         <div class="card-img-container">
-          <img class="card-img-top" src="{{ project.thumbnail }}" alt="{{ project.title }}">
+          <img class="card-img-top" src="{{ project.thumbnail }}" alt="{{ project.title }}" loading="lazy" decoding="async">
         </div>
         {% endif %}
         <div class="card-body">

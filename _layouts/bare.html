@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" style="height:100%">
+<head>
+    <title>{% if page.title %}{{ page.title }} | {% endif %}Wesley Maa</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <link rel="shortcut icon" type="image/png" href="/assets/images/fav.png?v=1"/>
+    {% include head.html %}
+    {% if page.custom_css %}
+    <link rel="stylesheet" href="/assets/css/{{ page.custom_css }}">
+    {% endif %}
+    {% if page.custom_js %}
+    <script defer src="/assets/js/{{ page.custom_js }}"></script>
+    {% endif %}
+</head>
+<body style="height:100%;">
+    {{ content }}
+</body>
+</html>

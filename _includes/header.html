@@ -12,7 +12,7 @@
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="/aboutme">About Me</a>
+            <a class="nav-link" id="aboutme-link" href="/aboutme" style="touch-action:manipulation">About Me</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/projects">Project Portfolio</a>
@@ -29,6 +29,33 @@
         </ul>
       </div>
     </nav>
+
+    <script>
+      (function() {
+        var aboutLink = document.getElementById("aboutme-link");
+        var clickCount = 0;
+        var navTimer = null;
+        var TARGET_CLICKS = 10;
+        var CLICK_WINDOW_MS = 500;
+
+        aboutLink.addEventListener("click", function(e) {
+          e.preventDefault();
+          clickCount++;
+          clearTimeout(navTimer);
+
+          if (clickCount >= TARGET_CLICKS) {
+            window.location = "/traces";
+            return;
+          }
+
+          // If no further click arrives quickly, treat it as a normal visit
+          navTimer = setTimeout(function() {
+            clickCount = 0;
+            window.location = aboutLink.getAttribute("href");
+          }, CLICK_WINDOW_MS);
+        });
+      })();
+    </script>
 </body>
 </html>
 

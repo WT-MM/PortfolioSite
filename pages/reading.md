@@ -12,7 +12,7 @@ custom_js: reading.js
     <div class="book-grid">
       {% for book in category.books %}
         <div class="covercontainer">
-          <img class="book" src="/assets/images/books/{{ book.cover }}" alt="{{ book.title }}">
+          <img class="book" src="/assets/images/books/{{ book.cover }}" alt="{{ book.title }}" loading="lazy" decoding="async">
         </div>  
       {% endfor %}
     </div>

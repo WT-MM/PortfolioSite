@@ -16,7 +16,7 @@ preload_image_type: image/webp
         <div class="col-sm-12 col-md-8" style="flex:1;display:flex;">
             <picture>
                 <source srcset="/assets/images/wesleymaa4-1600.webp" type="image/webp">
-                <img src="/assets/images/wesleymaa4-1600.jpg" alt="Wesley Maa" width="1600" height="2400" decoding="async" style="padding-bottom:10px;border-radius:5px;" class="img-fluid">
+                <img src="/assets/images/wesleymaa4-1600.jpg" alt="Wesley Maa" width="1600" height="2400" decoding="async" style="padding-bottom:10px;border-radius:5px;" class="img-fluid" data-paint-focus="0.47,0.16,0.15">
             </picture>
         </div>
         <div class="col-sm-12 col-md-8 text-left" id="aboutme">

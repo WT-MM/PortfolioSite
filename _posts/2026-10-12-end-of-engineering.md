@@ -88,7 +88,7 @@ At the end of every day, we would terrorize those cities. The three of us, stomp
 
 [^principles]: intro econ class that i prolly should not have taken as a 21yr old
 
-*I started writing this particular post in September but have been struggling to write something like this since June*
+*I started writing this particular post in September but have been struggling to write something like this since June and ended up writing most of this in October instead of studying for my 8:40 midterm*
 
 
 <!---

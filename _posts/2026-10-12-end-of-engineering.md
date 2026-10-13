@@ -70,7 +70,7 @@ I realized that I was living a more inauthentic life than I realized. I enjoyed 
 
 ## Hopeless Optimist
 
-Existence before essence. Let's get back to basics cause as it turns out, those philosophers were probably onto something. We are things in this universe that create their own meaning. This meaninglessness and despair and AI doomerism aren't anything new, but they have showed me that rationally understanding "impotence" or "angst"[^kierkegaard] as the fear and the dizziness of the infinite actually don't really help you once you're confronted with it. 
+Existence before essence. Let's get back to basics cause as it turns out, those philosophers were probably onto something. We are things in this universe that create their own meaning. This meaninglessness and despair and AI doomerism aren't anything new, but they have showed me that rationally understanding "impotence" or "angst"[^kierkegaard] as the fear and the dizziness of the infinite don't actually help you once you're confronted with it. 
 
 [^kierkegaard]: gotta tie in kierkegaard somehow. and yeah im gonna pronounce it /ɑŋst/
 

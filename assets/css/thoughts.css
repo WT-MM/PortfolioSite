@@ -324,6 +324,12 @@
   line-height: 1.5;
 }
 
+.post-read-time {
+  color: #888;
+  font-size: 0.85rem;
+  margin-top: 0.4rem;
+}
+
 /* Main content area - adding specific width control */
 .post-content {
   flex-grow: 1;
@@ -476,4 +482,32 @@
 /* Make sure sublist items are properly aligned */
 .toc-sublist li {
   padding-left: 0.5rem;
+}
+
+/* Kramdown footnotes ([^name] in markdown) */
+.post-content sup a.footnote {
+  text-decoration: none;
+  padding: 0 0.1em;
+}
+
+.post-content .footnotes {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.post-content .footnotes ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+}
+
+.post-content .footnotes p {
+  margin-bottom: 0.5rem;
+}
+
+.post-content .reversefootnote {
+  text-decoration: none;
+  margin-left: 0.25rem;
 }

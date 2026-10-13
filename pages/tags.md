@@ -28,6 +28,12 @@ permalink: /thoughts/tags/
                             {% if post.description %}
                                 <div class="post-description">{{ post.description }}</div>
                             {% endif %}
+                            {% assign word_count = post.content | strip_html | number_of_words %}
+                            {% assign read_time = word_count | plus: 199 | divided_by: 200 %}
+                            {% if read_time < 1 %}
+                                {% assign read_time = 1 %}
+                            {% endif %}
+                            <div class="post-read-time">{{ read_time }} min read</div>
                         </a>
                     </li>
                 {% endfor %}

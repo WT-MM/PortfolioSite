@@ -45,6 +45,14 @@ layout: default
           <p>{{ page.description }}</p>
         </div>
         {% endif %}
+        {% assign word_count = content | strip_html | number_of_words %}
+        {% assign read_time = word_count | plus: 199 | divided_by: 200 %}
+        {% if read_time < 1 %}
+          {% assign read_time = 1 %}
+        {% endif %}
+        <div class="mx-auto max-w-prose post-read-time text-gray-500 dark:text-gray-400">
+          {{ read_time }} min read
+        </div>
       </div>
     </header>
 

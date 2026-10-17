@@ -2,21 +2,21 @@
 layout: post
 title: "Artisan Engineer; Impotent Optimist"
 date: 2026-10-12
-permalink: /drafts/2026/10-12/artisanal-engineers/
+permalink: /2026/10-12/artisanal-engineers/
 description: "The end of expertise"
-tags: [life, speculation, draft]
+tags: [life, speculation]
 ---
-*As with everything else I write, there will be very little fact checking and only occasional reference lookups if it nags my brain enough*
+*As with everything else I write, there is very little fact checking and only occasional reference lookups if it nags my brain enough*
 
 ## Artisan
 
-There's a common sentiment that engineers will go the way of the artisan. I think even that analogy is too optimistic; at least artisans have a connotation of some level of quality and care above that of mass produced, commoditized objects.
+There's a common sentiment that engineers will go the way of the artisan. I think even that analogy is too optimistic; at least the word artisinal connotes a level of quality and care above that of mass produced, commoditized objects.
 
 Instead, it seems to me that we truly will live in an abundant world where there will be no compromises between quality and quantity. Just to make sure I state it, I am very excited about this world. It makes sense that I should strive for a better and more beautiful future where men and women are not constrained by the reality and belief that we live under scarcity. At least, this is my personal belief. 
 
-As I have become more personally convinced that this future is imminent, I think it necessarily begets the reality that **engineers** and (speculatively) everyone **technical** will become functionally obsolete. And because it's important to keep my definitions clear, by **technical** I mean anyone with specific, expert knowledge in a subject in order to accomplish some task. It's a broader definition than most would use, but I like to use it because it has a closer connection to the origins of the word 'technology'. 
+As I have become more convinced that this future is imminent, I think it necessarily follows that **engineers** and (speculatively) everyone **technical** will become functionally obsolete. And because it's important to keep my definitions clear, by **technical** I mean anyone with specific, expert knowledge in a subject in order to accomplish some task. It's a broader definition than most would use, but I like how it's more faithful to the etymology of the word 'technology'. 
 
-This "reckoning" of humanity's endless (but maybe only modern) pursuit towards innovation feels inevitable. As humans became more and more productive, it makes sense that we would eventually come to eliminate drudgery entirely. Progress has always been motivated to, at some level, reduce unnecessary work and effort, even if reality has caused all previous and existing systems of allocation to fail partly (and some more drastically)[^econ]. Taken to its conclusion, becoming technical or an expert, to achieve some end is itself, in an ideal world, drudgery.
+This "reckoning" of humanity's pursuit towards innovation feels inevitable. As humans became more and more productive, it makes sense that we would eventually come to eliminate drudgery entirely. Progress has always been motivated to, at some level, reduce unnecessary work and effort, even if reality has caused all previous and existing systems of allocation to fail partly (and some more drastically)[^econ]. Taken to its conclusion, becoming technical or an expert, to achieve some end is itself, in an ideal world, drudgery.
 
 [^econ]: kept vague because idgaf about talking economic theory rn
 
@@ -32,7 +32,7 @@ I started seriously thinking about abundance and more explicitly AI somewhere ne
 
 For me, the inflection point happened somewhere around the end of Summer 2026 (say late August, early September). I think that's when Fable 5.1 and GPT-6 Astra came out. A few weeks before that, it already seemed to me that a lot of software engineering was over. At work, I never actually wrote code. Instead I was trying to understand tradeoffs, absorb as much domain knowledge relevant to whatever problem I was solving at the time was, and designing larger scale systems.
 
-When Astra came out though, it was very shockingly good at using the computer and browser as a human would. I had it design various parts for me in OnShape (the CAD tool), undergo all of the exhausting administrative burden of starting another year at university, and of course build a lot of useful software including the editor that I'm now writing this in.
+When Astra came out though, it was shockingly proficient at using the computer and browser as a human would. I had it design various parts for me in OnShape (the CAD tool), undergo all of the exhausting administrative burden of starting another year at university, and of course build a lot of useful software including the editor that I'm now writing this in.
 
 In other words, I'd begun to feel quite **impotent**. Again with definitions (though this one's more clear), *impotens* as in without power. It wasn't that I couldn't get things done (I could get more done than ever), but that it was no longer a differentiator to do things. It felt like my own ability did not matter much anymore.
 
@@ -58,29 +58,29 @@ So I think redundancy is mostly just **insignificance made empirical**. To unite
 
 ## Cheater
 
-I tried to figure out why I was struggling so much more to define meaning. The first thought that was something about authentic difficulty: I don't want to live in a world where we go to physical and mental gyms and social gyms and whatever other constructs arise because nothing needs to be done anymore. 
+I tried to figure out why I was struggling so much more to define meaning. The first thought that was something about authentic difficulty: I don't want to live in a world where we go to physical and mental gyms and social gyms and whatever other constructs arise because nothing needs to be done anymore.
 
-I don't think that's really true, since I still enjoy imposed difficulties. I love playing board and card games. 
+I don't think that's really true, since I still enjoy imposed difficulties -- I love playing board and card games after all. 
 
 I think thematically it's similar to cheating. By definition, playing a game almost means taking on redundant restrictions. If you cheat, you're not really playing the game and if everyone cheats, there's not much point at all in playing. 
 
 Tying back to artisans and engineering and expertise, engineering has never been a game. The rules were set by necessity because there was no other way to do it. As AI becomes better, that necessity begins to go away, and the strict rules that I'd played with will begin to crumble faster and faster. I felt a bit lost because the game I enjoyed so much was disappearing. 
 
-I realized that I was living a more inauthentic life than I realized. I enjoyed being good (or maybe just the illusion of being good) at what I did because it was partially a relative need for me. But I also think it's shown that I do actually care at an intrinsic level about solving problems and making the world better. In losing the inauthentic value of engineering, I've ironically come to care more about what it is I do in this world. Insofar as expertise *to achieve some end* is drudgery, I didn't know which parts of my expertise were a means to an end and which parts were The Thing Itself until AI came to pull them apart. 
+I realized that I was living a more inauthentic life than I realized. I enjoyed being good (or maybe just the illusion of being good) at what I did because I got some level of satisfaction from being better than others. Ironically though, in losing the inauthentic value of engineering, I've come to care more about what it is I do in this world. That I intrinsically do care about solving problems and making the world better. Insofar as expertise *to achieve some end* is drudgery, I didn't know which parts of my expertise were a means to an end and which parts were The Thing Itself until AI came to pull them apart. 
 
 ## Hopeless Optimist
 
-Existence before essence. Let's get back to basics cause as it turns out, those philosophers were probably onto something. We are things in this universe that create their own meaning. This meaninglessness and despair and AI doomerism aren't anything new, but they have showed me that rationally understanding "impotence" or "angst"[^kierkegaard] as the fear and the dizziness of the infinite don't actually help you once you're confronted with it. 
+Existence before essence -- those philosophers were probably onto something. I've come to agree generally that we are things in this universe that create their own meaning. This meaninglessness and despair and AI doomerism aren't anything new, but they have showed me that rationally understanding "impotence" or "angst"[^kierkegaard] as the fear and the dizziness of the infinite don't actually help you once you're confronted with it. 
 
-[^kierkegaard]: gotta tie in kierkegaard somehow. and yeah im gonna pronounce it /ɑŋst/
+[^kierkegaard]: need to tie in kierkegaard somehow, and yes i pronounce it /ɑŋst/
 
-I took Principles of Economics[^principles] last semester, so I know my shit. Keynes predicted in 1930 that by around 2030 the "economic problem" would be solved and humanity would face the real, permanent problem of living  "wisely and agreeably and well." He thought there'd be a collective panic along the way as people lost the structure of the work that had supported their lives. This is probably true and will continue to be more true as more people come to the same existential panic that I have. 
+I took Principles of Economics[^principles] last semester, so I'm more or less caught up on what these economists are up to. Keynes predicted in 1930 that by around 2030 the "economic problem" would be solved and humanity would face the real, permanent problem of living  "wisely and agreeably and well." He thought there'd be a collective panic along the way as people lost the structure of the work that had supported their lives. This is probably true and will continue to be more true as more people come to the same existential panic that I have. 
 
-Yet, I've chosen to adopt the same middling mindset I've always had: you can't know what it'll be like. There's no point in worrying about post-scarcity because it might just be impossible to understand what it'll be like and for now, we still need to get there. The "me" who has to deal with that might be entirely alien. 
+At the same time, I've also come to adopt a newfound faith. I really don't think we can know what the future will actually look like and what the experience of being redundant will do to us. There's no point in worrying about post-scarcity because it might just be impossible to understand what it'll be like and for now, we still need to get there. The "me" who has to deal with that might be entirely alien, so I just have faith that it will all work out in the end.
 
-I think I've come around to being optimistic again. We haven't "won" life yet. The world still isn't utopia, there are still real problems and real needs in the world and real meaning in getting us from here and now to then and there.
+I've come back around to being optimistic again. We haven't "won" life yet. The world still isn't utopia, there are still real problems and real needs in the world and real meaning in getting us from here and now to then and there.
 
-Right now we are in the most important game not just of our lives but of all human history, and luckily for us, *it still won't be a game* for a tiny bit longer. 
+Right now we are in the most important game not just of our lives but of all human history, and luckily for us, *it still won't be a game* for a tiny bit longer. When it does all end, I know that it will have been the right thing to work towards and I have the faith that I'll find life worth living in the new world. 
 
 When I was a kid maybe in 3rd grade or something like that, I used to play a lot with these flat geometric blocks after school. I'd make a whole 2D world -- my own Flatland -- filled with cathedrals and cars, boats and trees. Every few days, when I'd wait in the classroom for my brother and sister to come back from their after school clubs, I'd play with foam blocks to make castles and cities.
 

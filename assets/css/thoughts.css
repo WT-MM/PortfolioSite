@@ -511,3 +511,22 @@
   text-decoration: none;
   margin-left: 0.25rem;
 }
+
+/* Poem posts: wrap content in <div class="poem" markdown="1"> so single newlines become line breaks */
+.post-content .poem p {
+  white-space: pre-line;
+  text-align: center;
+  margin: 0 0 1.5em;
+}
+
+.post-content .poem hr {
+  border: none;
+  text-align: center;
+  margin: 2.5em 0;
+}
+
+.post-content .poem hr::after {
+  content: "* * *";
+  color: #9ca3af;
+  letter-spacing: 0.5em;
+}

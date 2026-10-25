@@ -12,19 +12,19 @@ tags: [life, short]
 There are moments in life
 when everything is just open.
 Dizzyingly so,
-but I can't help but feel numb to it.
+and I can't help but feel numb to it.
 
 And I fall into a deep, deep,
-depressive spell.
+spell
 
-It's strangely periodic.
-not consistent,
-but always repeating.
-I suspect it's stress, work, inadequacies,
+It's oddly periodic.
+never consistent,
+but always preparing.
+I suspect it's busyness, life, inadequacies,
 small little feelings of being Out-Of-Place.
 Whenever it happens, I try to leave.
 It's the only way I can remember
-what is so beautiful, so fulfilling,
+what is so beautiful, so satisfying,
 about being alive in this world.
 
 It's the mist-clouded mountaintop at night

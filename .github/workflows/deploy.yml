@@ -24,7 +24,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3.6'
+          ruby-version: '3.3'  # latest 3.3.x; ubuntu-latest (26.04) only has the newest patch builds
           bundler-cache: true
       
       - name: Setup Pages
